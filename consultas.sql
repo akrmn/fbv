@@ -14,8 +14,6 @@ WHERE p_partkey = ps_partkey AND s_suppkey = ps_suppkey AND p_size = $1
             AND r_name = $3 )
 ORDER BY s_acctbal DESC;
 
--- EXECUTE q11 (15, '%BRASS', 'EUROPE');
-
 
 -- Q12: Prioridad de envío -----------------------------------------------------
 PREPARE q12 AS
@@ -26,8 +24,6 @@ WHERE c_mktsegment = $1 AND c_custkey = o_custkey AND l_orderkey = o_orderkey
     AND o_orderdate < $2 AND l_shipdate > $2
 GROUP BY l_orderkey, o_orderdate, o_shippriority
 ORDER BY revenue DESC, o_orderdate;
-
--- EXECUTE q12('BUILDING', '1995-03-15');
 
 
 -- Q13: Reporte de ítems devueltos ---------------------------------------------
@@ -40,8 +36,6 @@ WHERE c_custkey = o_custkey AND l_orderkey = o_orderkey
     AND l_returnflag = 'R' AND c_nationkey = n_nationkey
 GROUP BY c_custkey, c_name, c_acctbal, c_phone, n_name, c_address, c_comment
 ORDER BY revenue DESC;
-
--- EXECUTE q13('1993-10-01');
 
 
 -- Q21: Modos de envío y orden de prioridad ------------------------------------
@@ -66,8 +60,6 @@ WHERE o_orderkey = l_orderkey AND l_shipmode IN ($1, $2)
 GROUP BY l_shipmode
 ORDER BY l_shipmode;
 
--- EXECUTE q21('MAIL', 'SHIP', '1994-01-01');
-
 
 -- Q22: Relación parte/proveedor -----------------------------------------------
 PREPARE q22 AS
@@ -81,8 +73,6 @@ WHERE p_partkey = ps_partkey AND p_brAND <> $1
         WHERE s_comment LIKE '%Customer%Complaints%')
 GROUP BY p_brAND,p_type,p_size
 ORDER BY supplier_cnt DESC, p_brAND, p_type, p_size;
-
--- EXECUTE q22('Brand#45', 'MEDIUM POLISHED%', 49, 14, 23, 45, 19, 3, 36, 9);
 
 
 -- Q23: Oportunidad de ventas globales -----------------------------------------
@@ -102,5 +92,3 @@ FROM (
 AS custsale
 GROUP BY cntrycode
 ORDER BY cntrycode;
-
--- EXECUTE q23('13','31','23','29','30','18','17');
