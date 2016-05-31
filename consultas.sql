@@ -1,4 +1,4 @@
--- Q11: Proveedor con el mínimo costo ------------------------------------------
+-- Q11: Proveedor con el mínimo costo ------------------------------------------------------------
 PREPARE q11 AS
 SELECT s_acctbal, s_name, n_name, p_partkey, p_mfgr, s_address,
     s_phone, s_comment
@@ -14,13 +14,12 @@ WHERE p_partkey = ps_partkey AND s_suppkey = ps_suppkey AND p_size = $1
             AND r_name = $3 )
 ORDER BY s_acctbal DESC;
 
-prepare q11test AS
-q11 (15, '%BRASS', 'EUROPE');
+-- EXECUTE q11 (15, '%BRASS', 'EUROPE');
 
 
 -- Q12: Prioridad de envío -----------------------------------------------------
 PREPARE q12 AS
-SELECT l_orderkey, sum(l_extendedprice*(1 ­- l_discount)) AS revenue,
+SELECT l_orderkey, sum(l_extendedprice*(1 - l_discount)) AS revenue,
     o_orderdate,o_shippriority
 FROM customer, orders, lineitem
 WHERE c_mktsegment = $1 AND c_custkey = o_custkey AND l_orderkey = o_orderkey
@@ -28,13 +27,12 @@ WHERE c_mktsegment = $1 AND c_custkey = o_custkey AND l_orderkey = o_orderkey
 GROUP BY l_orderkey, o_orderdate, o_shippriority
 ORDER BY revenue DESC, o_orderdate;
 
-prepare q12test AS
-q12('BUILDING', '1995-03-15');
+-- EXECUTE q12('BUILDING', '1995-03-15');
 
 
 -- Q13: Reporte de ítems devueltos ---------------------------------------------
 PREPARE q13 AS
-SELECT c_custkey,c_name, sum(l_extendedprice * (1 ­ l_discount)) AS revenue,
+SELECT c_custkey,c_name, sum(l_extendedprice * (1 - l_discount)) AS revenue,
     c_acctbal, n_name, c_address, c_phone, c_comment
 FROM customer, orders, lineitem, nation
 WHERE c_custkey = o_custkey AND l_orderkey = o_orderkey
@@ -43,22 +41,21 @@ WHERE c_custkey = o_custkey AND l_orderkey = o_orderkey
 GROUP BY c_custkey, c_name, c_acctbal, c_phone, n_name, c_address, c_comment
 ORDER BY revenue DESC;
 
-prepare q13test AS
-q13('1993-10-01');
+-- EXECUTE q13('1993-10-01');
 
 
 -- Q21: Modos de envío y orden de prioridad ------------------------------------
 PREPARE q21 AS
 SELECT l_shipmode,
     sum (CASE
-        WHEN o_orderpriority = '1­-URGENT'
-        OR o_orderpriority = '2­-HIGH'
+        WHEN o_orderpriority = '1-URGENT'
+        OR o_orderpriority = '2-HIGH'
             THEN 1
             ELSE 0
         END) AS high_line_count,
     sum(CASE
-        WHEN o_orderpriority <> '1­-URGENT'
-        AND o_orderpriority <> '2­-HIGH'
+        WHEN o_orderpriority <> '1-URGENT'
+        AND o_orderpriority <> '2-HIGH'
             THEN 1
             ELSE 0
         END) AS low_line_count
@@ -69,8 +66,7 @@ WHERE o_orderkey = l_orderkey AND l_shipmode IN ($1, $2)
 GROUP BY l_shipmode
 ORDER BY l_shipmode;
 
-prepare q21test AS
-q21('MAIL', 'SHIP', '1994-01-01');
+-- EXECUTE q21('MAIL', 'SHIP', '1994-01-01');
 
 
 -- Q22: Relación parte/proveedor -----------------------------------------------
@@ -86,8 +82,7 @@ WHERE p_partkey = ps_partkey AND p_brAND <> $1
 GROUP BY p_brAND,p_type,p_size
 ORDER BY supplier_cnt DESC, p_brAND, p_type, p_size;
 
-prepare q22test AS
-q22('Brand#45', 'MEDIUM POLISHED%', 49, 14, 23, 45, 19, 3, 36, 9);
+-- EXECUTE q22('Brand#45', 'MEDIUM POLISHED%', 49, 14, 23, 45, 19, 3, 36, 9);
 
 
 -- Q23: Oportunidad de ventas globales -----------------------------------------
@@ -108,5 +103,4 @@ AS custsale
 GROUP BY cntrycode
 ORDER BY cntrycode;
 
-prepare q23test AS
-q23('13','31','23','29','30','18','17');
+-- EXECUTE q23('13','31','23','29','30','18','17');
