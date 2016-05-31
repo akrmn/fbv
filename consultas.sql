@@ -1,4 +1,4 @@
-## Q11: Proveedor con el mínimo costo ##########################################
+-- Q11: Proveedor con el mínimo costo ------------------------------------------
 PREPARE q11 AS
 SELECT s_acctbal, s_name, n_name, p_partkey, p_mfgr, s_address,
     s_phone, s_comment
@@ -18,7 +18,7 @@ prepare q11test AS
 q11 (15, '%BRASS', 'EUROPE');
 
 
-## Q12: Prioridad de envío #####################################################
+-- Q12: Prioridad de envío -----------------------------------------------------
 PREPARE q12 AS
 SELECT l_orderkey, sum(l_extendedprice*(1 ­- l_discount)) AS revenue,
     o_orderdate,o_shippriority
@@ -32,7 +32,7 @@ prepare q12test AS
 q12('BUILDING', '1995-03-15');
 
 
-## Q13: Reporte de ítems devueltos #############################################
+-- Q13: Reporte de ítems devueltos ---------------------------------------------
 PREPARE q13 AS
 SELECT c_custkey,c_name, sum(l_extendedprice * (1 ­ l_discount)) AS revenue,
     c_acctbal, n_name, c_address, c_phone, c_comment
@@ -47,7 +47,7 @@ prepare q13test AS
 q13('1993-10-01');
 
 
-## Q21: Modos de envío y orden de prioridad ####################################
+-- Q21: Modos de envío y orden de prioridad ------------------------------------
 PREPARE q21 AS
 SELECT l_shipmode,
     sum (CASE
@@ -73,7 +73,7 @@ prepare q21test AS
 q21('MAIL', 'SHIP', '1994-01-01');
 
 
-## Q22: Relación parte/proveedor ###############################################
+-- Q22: Relación parte/proveedor -----------------------------------------------
 PREPARE q22 AS
 SELECT p_brAND, p_type, p_size, count(distinct ps_suppkey) AS supplier_cnt
 FROM partsupp, part
@@ -90,7 +90,7 @@ prepare q22test AS
 q22('Brand#45', 'MEDIUM POLISHED%', 49, 14, 23, 45, 19, 3, 36, 9);
 
 
-## Q23: Oportunidad de ventas globales #########################################
+-- Q23: Oportunidad de ventas globales -----------------------------------------
 PREPARE q23 AS
 SELECT cntrycode, count(*) AS numcust, sum(c_acctbal) AS totacctbal
 FROM (
