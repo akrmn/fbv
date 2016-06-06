@@ -1,4 +1,3 @@
-\i i23.sql
 \i q23improved.sql
 
 explain (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)

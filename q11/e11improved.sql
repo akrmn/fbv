@@ -1,4 +1,3 @@
-\i i11.sql
 \i q11improved.sql
 
 explain (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)
