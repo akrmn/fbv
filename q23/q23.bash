@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
-# Consulta original
-## Borrar índices
+echo "Consulta original"
+echo "  Borrando índices"
 psql -qAt -f d23.sql > /dev/null
-## Limpiar cache
-sudo ../clearcache.bash
-## Correr consulta, guardando resultado
+echo "  Limpiando cache"
+sudo ../clearcache.bash > /dev/null
+echo "  Ejecutando consulta original"
 psql -qAt -f e23original.sql > a23original.json
+echo "Consulta original completa"
 
-# Consulta Mejorada
-## Crear índices
+echo
+
+echo "Consulta mejorada"
+echo "  Creando índices"
 psql -qAt -f i23.sql > /dev/null
-## Limpiar Cache
-sudo ../clearcache.bash
-## Correr consulta, guardando resultado
+echo "  Limpiando cache"
+sudo ../clearcache.bash > /dev/null
+echo "  Ejecutando consulta mejorada"
 psql -qAt -f e23improved.sql > a23improved.json
+echo "Consulta mejorada completa"

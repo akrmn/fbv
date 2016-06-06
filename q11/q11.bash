@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
-# Consulta original
-## Borrar índices
+echo "Consulta original"
+echo "  Borrando índices"
 psql -qAt -f d11.sql > /dev/null
-## Limpiar cache
-sudo ../clearcache.bash
-## Correr consulta, guardando resultado
+echo "  Limpiando cache"
+sudo ../clearcache.bash > /dev/null
+echo "  Ejecutando consulta original"
 psql -qAt -f e11original.sql > a11original.json
+echo "Consulta original completa"
 
-# Consulta Mejorada
-## Crear índices
+echo
+
+echo "Consulta mejorada"
+echo "  Creando índices"
 psql -qAt -f i11.sql > /dev/null
-## Limpiar Cache
-sudo ../clearcache.bash
-## Correr consulta, guardando resultado
+echo "  Limpiando cache"
+sudo ../clearcache.bash > /dev/null
+echo "  Ejecutando consulta mejorada"
 psql -qAt -f e11improved.sql > a11improved.json
+echo "Consulta mejorada completa"

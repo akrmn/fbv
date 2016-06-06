@@ -2,10 +2,10 @@
 /* $1 = 15, $2 = '%BRASS', $3 = 'EUROPE' */
 
 prepare q11improved as
-with minPerType as (
+with minPerPart as (
   select
-    p_type             as mpt_type,
-    min(ps_supplycost) as mpt_minCost
+    min(ps_supplycost) as mpp_mincost,
+    p_partkey          as mpp_partkey
   from
     part,
     partsupp,
@@ -20,9 +20,9 @@ with minPerType as (
     and reverse(p_type) like reverse($2)
     and r_name             = $3
   group by
-    p_type
+    mpp_partkey
   order by
-    p_type
+    mpp_partkey
 )
 select
   s_acctbal,
@@ -35,20 +35,19 @@ select
   s_comment
 from
   part,
-  partsupp,
   supplier,
+  partsupp,
   nation,
   region,
-  minPerType
-where p_partkey          = ps_partkey
-  and ps_suppkey         = s_suppkey
-  and s_nationkey        = n_nationkey
-  and n_regionkey        = r_regionkey
-  and p_size             = $1
-  and reverse(p_type) like reverse($2)
-  and r_name             = $3
-  and p_type             = mpt_type
-  and ps_supplycost      = mpt_minCost
+  minPerPart
+where p_partkey     = ps_partkey
+  and ps_suppkey    = s_suppkey
+  and s_nationkey   = n_nationkey
+  and p_size        = $1
+  and p_type     like $2
+  and r_name        = $3
+  and ps_supplycost = mpp_mincost
+  and p_partkey     = mpp_partkey
 order by
   s_acctbal desc,
   n_name,
@@ -56,25 +55,27 @@ order by
   p_partkey;
 
 /*
-with minPerType as (
+with minPerPart as (
   select
-    p_type             as mpt_type,
-    min(ps_supplycost) as mpt_minCost
+    min(ps_supplycost) as mpp_mincost,
+    p_partkey          as mpp_partkey
   from
     part,
     partsupp,
     supplier,
     nation,
     region
-  where p_partkey   = ps_partkey
-    and s_suppkey   = ps_suppkey
-    and s_nationkey = n_nationkey
-    and n_regionkey = r_regionkey
-    and p_size      = 15
-    and p_type   like '%BRASS'
-    and r_name      = 'EUROPE'
+  where p_partkey          = ps_partkey
+    and ps_suppkey         = s_suppkey
+    and s_nationkey        = n_nationkey
+    and n_regionkey        = r_regionkey
+    and p_size             = 15
+    and reverse(p_type) like reverse('%BRASS')
+    and r_name             = 'EUROPE'
   group by
-    p_type
+    mpp_partkey
+  order by
+    mpp_partkey
 )
 select
   s_acctbal,
@@ -87,19 +88,19 @@ select
   s_comment
 from
   part,
-  partsupp,
   supplier,
+  partsupp,
   nation,
   region,
-  minPerType
-where p_partkey          = ps_partkey
-  and s_suppkey          = ps_suppkey
-  and s_nationkey        = n_nationkey
-  and n_regionkey        = r_regionkey
-  and p_size             = 15
-  and r_name             = 'EUROPE'
-  and p_type             = mpt_type
-  and ps_supplycost      = mpt_minCost
+  minPerPart
+where p_partkey     = ps_partkey
+  and ps_suppkey    = s_suppkey
+  and s_nationkey   = n_nationkey
+  and p_size        = 15
+  and p_type     like '%BRASS'
+  and r_name        = 'EUROPE'
+  and ps_supplycost = mpp_mincost
+  and p_partkey     = mpp_partkey
 order by
   s_acctbal desc,
   n_name,
