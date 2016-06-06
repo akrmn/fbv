@@ -1,0 +1,5 @@
+\i Indexes21.sql
+\i q21improved.sql
+
+EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT YAML)
+EXECUTE q21('MAIL', 'SHIP', '1994-01-01');
