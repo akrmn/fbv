@@ -1,4 +1,5 @@
-\i q13.sql
+\i q13original.sql
 
 EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT YAML)
-EXECUTE q13('1993-10-01');
+EXECUTE q13original('1993-10-01');
+

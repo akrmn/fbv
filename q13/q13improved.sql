@@ -1,5 +1,6 @@
--- Q13: Reporte de ítems devueltos ---------------------------------------------
-PREPARE q13 AS
+/*Q13 Reporte de items devueltos */
+
+prepare q13improved AS
 SELECT c_custkey,c_name, sum(l_extendedprice * (1 - l_discount)) AS revenue,
     c_acctbal, n_name, c_address, c_phone, c_comment
 FROM customer, orders, lineitem, nation

@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
 
+echo q"$1"
+
+cd q"$1"
+
 echo "Consulta original"
 echo "  Borrando índices"
-psql -qAt -f d23.sql > /dev/null
+psql -qAt -f dropIndices"$1".sql > /dev/null
 echo "  Limpiando cache"
 sudo ../clearcache.bash > /dev/null
 echo "  Ejecutando consulta original"
-psql -qAt -f e23original.sql > a23original.json
+psql -qAt -f execute"$1"original.sql > ../results/analysis"$1"original.yml
 echo "Consulta original completa"
 
 echo
 
 echo "Consulta mejorada"
 echo "  Creando índices"
-psql -qAt -f i23.sql > /dev/null
+psql -qAt -f indices"$1".sql > /dev/null
 echo "  Limpiando cache"
 sudo ../clearcache.bash > /dev/null
 echo "  Ejecutando consulta mejorada"
-psql -qAt -f e23improved.sql > a23improved.json
+psql -qAt -f execute"$1"improved.sql > ../results/analysis"$1"improved.yml
 echo "Consulta mejorada completa"
+
+echo
+
+cd ..

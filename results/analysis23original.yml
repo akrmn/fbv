@@ -1,0 +1,242 @@
+- Plan: 
+    Node Type: "Aggregate"
+    Strategy: "Sorted"
+    Startup Cost: 85042.96
+    Total Cost: 85062.19
+    Plan Rows: 769
+    Plan Width: 22
+    Actual Startup Time: 894.956
+    Actual Total Time: 896.550
+    Actual Rows: 7
+    Actual Loops: 1
+    Output: 
+      - "(\"substring\"(customer.c_phone, 1, 2))"
+      - "count(*)"
+      - "sum(customer.c_acctbal)"
+    Group Key: 
+      - "(\"substring\"(customer.c_phone, 1, 2))"
+    Shared Hit Blocks: 3574
+    Shared Read Blocks: 28760
+    Shared Dirtied Blocks: 0
+    Shared Written Blocks: 0
+    Local Hit Blocks: 0
+    Local Read Blocks: 0
+    Local Dirtied Blocks: 0
+    Local Written Blocks: 0
+    Temp Read Blocks: 4453
+    Temp Written Blocks: 4391
+    I/O Read Time: 0.000
+    I/O Write Time: 0.000
+    Plans: 
+      - Node Type: "Aggregate"
+        Strategy: "Plain"
+        Parent Relationship: "InitPlan"
+        Subplan Name: "InitPlan 1 (returns $0)"
+        Startup Cost: 7140.40
+        Total Cost: 7140.41
+        Plan Rows: 1
+        Plan Width: 6
+        Actual Startup Time: 128.591
+        Actual Total Time: 128.592
+        Actual Rows: 1
+        Actual Loops: 1
+        Output: 
+          - "avg(customer_1.c_acctbal)"
+        Shared Hit Blocks: 2
+        Shared Read Blocks: 3564
+        Shared Dirtied Blocks: 0
+        Shared Written Blocks: 0
+        Local Hit Blocks: 0
+        Local Read Blocks: 0
+        Local Dirtied Blocks: 0
+        Local Written Blocks: 0
+        Temp Read Blocks: 0
+        Temp Written Blocks: 0
+        I/O Read Time: 0.000
+        I/O Write Time: 0.000
+        Plans: 
+          - Node Type: "Seq Scan"
+            Parent Relationship: "Outer"
+            Relation Name: "customer"
+            Schema: "public"
+            Alias: "customer_1"
+            Startup Cost: 0.00
+            Total Cost: 7128.50
+            Plan Rows: 4758
+            Plan Width: 6
+            Actual Startup Time: 0.008
+            Actual Total Time: 120.383
+            Actual Rows: 38120
+            Actual Loops: 1
+            Output: 
+              - "customer_1.c_custkey"
+              - "customer_1.c_name"
+              - "customer_1.c_address"
+              - "customer_1.c_nationkey"
+              - "customer_1.c_phone"
+              - "customer_1.c_acctbal"
+              - "customer_1.c_mktsegment"
+              - "customer_1.c_comment"
+            Filter: "((customer_1.c_acctbal > 0.00) AND (\"substring\"(customer_1.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])))"
+            Rows Removed by Filter: 111880
+            Shared Hit Blocks: 2
+            Shared Read Blocks: 3564
+            Shared Dirtied Blocks: 0
+            Shared Written Blocks: 0
+            Local Hit Blocks: 0
+            Local Read Blocks: 0
+            Local Dirtied Blocks: 0
+            Local Written Blocks: 0
+            Temp Read Blocks: 0
+            Temp Written Blocks: 0
+            I/O Read Time: 0.000
+            I/O Write Time: 0.000
+      - Node Type: "Sort"
+        Parent Relationship: "Outer"
+        Startup Cost: 77902.55
+        Total Cost: 77904.48
+        Plan Rows: 769
+        Plan Width: 22
+        Actual Startup Time: 894.687
+        Actual Total Time: 895.009
+        Actual Rows: 6384
+        Actual Loops: 1
+        Output: 
+          - "(\"substring\"(customer.c_phone, 1, 2))"
+          - "customer.c_acctbal"
+        Sort Key: 
+          - "(\"substring\"(customer.c_phone, 1, 2))"
+        Sort Method: "quicksort"
+        Sort Space Used: 492
+        Sort Space Type: "Memory"
+        Shared Hit Blocks: 3574
+        Shared Read Blocks: 28760
+        Shared Dirtied Blocks: 0
+        Shared Written Blocks: 0
+        Local Hit Blocks: 0
+        Local Read Blocks: 0
+        Local Dirtied Blocks: 0
+        Local Written Blocks: 0
+        Temp Read Blocks: 4453
+        Temp Written Blocks: 4391
+        I/O Read Time: 0.000
+        I/O Write Time: 0.000
+        Plans: 
+          - Node Type: "Hash Join"
+            Parent Relationship: "Outer"
+            Join Type: "Anti"
+            Startup Cost: 64806.00
+            Total Cost: 77865.69
+            Plan Rows: 769
+            Plan Width: 22
+            Actual Startup Time: 741.907
+            Actual Total Time: 892.995
+            Actual Rows: 6384
+            Actual Loops: 1
+            Output: 
+              - "\"substring\"(customer.c_phone, 1, 2)"
+              - "customer.c_acctbal"
+            Hash Cond: "(customer.c_custkey = orders.o_custkey)"
+            Shared Hit Blocks: 3571
+            Shared Read Blocks: 28760
+            Shared Dirtied Blocks: 0
+            Shared Written Blocks: 0
+            Local Hit Blocks: 0
+            Local Read Blocks: 0
+            Local Dirtied Blocks: 0
+            Local Written Blocks: 0
+            Temp Read Blocks: 4453
+            Temp Written Blocks: 4391
+            I/O Read Time: 0.000
+            I/O Write Time: 0.000
+            Plans: 
+              - Node Type: "Seq Scan"
+                Parent Relationship: "Outer"
+                Relation Name: "customer"
+                Schema: "public"
+                Alias: "customer"
+                Startup Cost: 0.00
+                Total Cost: 7128.50
+                Plan Rows: 1750
+                Plan Width: 26
+                Actual Startup Time: 128.607
+                Actual Total Time: 181.499
+                Actual Rows: 19000
+                Actual Loops: 1
+                Output: 
+                  - "customer.c_phone"
+                  - "customer.c_acctbal"
+                  - "customer.c_custkey"
+                Filter: "((customer.c_acctbal > $0) AND (\"substring\"(customer.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])))"
+                Rows Removed by Filter: 131000
+                Shared Hit Blocks: 3568
+                Shared Read Blocks: 3564
+                Shared Dirtied Blocks: 0
+                Shared Written Blocks: 0
+                Local Hit Blocks: 0
+                Local Read Blocks: 0
+                Local Dirtied Blocks: 0
+                Local Written Blocks: 0
+                Temp Read Blocks: 0
+                Temp Written Blocks: 0
+                I/O Read Time: 0.000
+                I/O Write Time: 0.000
+              - Node Type: "Hash"
+                Parent Relationship: "Inner"
+                Startup Cost: 40196.00
+                Total Cost: 40196.00
+                Plan Rows: 1500000
+                Plan Width: 4
+                Actual Startup Time: 612.088
+                Actual Total Time: 612.088
+                Actual Rows: 1500000
+                Actual Loops: 1
+                Output: 
+                  - "orders.o_custkey"
+                Hash Buckets: 131072
+                Original Hash Buckets: 131072
+                Hash Batches: 32
+                Original Hash Batches: 32
+                Peak Memory Usage: 2697
+                Shared Hit Blocks: 0
+                Shared Read Blocks: 25196
+                Shared Dirtied Blocks: 0
+                Shared Written Blocks: 0
+                Local Hit Blocks: 0
+                Local Read Blocks: 0
+                Local Dirtied Blocks: 0
+                Local Written Blocks: 0
+                Temp Read Blocks: 0
+                Temp Written Blocks: 4236
+                I/O Read Time: 0.000
+                I/O Write Time: 0.000
+                Plans: 
+                  - Node Type: "Seq Scan"
+                    Parent Relationship: "Outer"
+                    Relation Name: "orders"
+                    Schema: "public"
+                    Alias: "orders"
+                    Startup Cost: 0.00
+                    Total Cost: 40196.00
+                    Plan Rows: 1500000
+                    Plan Width: 4
+                    Actual Startup Time: 0.475
+                    Actual Total Time: 358.127
+                    Actual Rows: 1500000
+                    Actual Loops: 1
+                    Output: 
+                      - "orders.o_custkey"
+                    Shared Hit Blocks: 0
+                    Shared Read Blocks: 25196
+                    Shared Dirtied Blocks: 0
+                    Shared Written Blocks: 0
+                    Local Hit Blocks: 0
+                    Local Read Blocks: 0
+                    Local Dirtied Blocks: 0
+                    Local Written Blocks: 0
+                    Temp Read Blocks: 0
+                    Temp Written Blocks: 0
+                    I/O Read Time: 0.000
+                    I/O Write Time: 0.000
+  Triggers: 
+  Execution Time: 897.003

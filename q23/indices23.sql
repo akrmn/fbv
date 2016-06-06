@@ -1,3 +1,5 @@
+--índices para las consulta 23
+
 create index idx_c_ctrycode_acctbal
   on customer (substring(c_phone from 1 for 2), c_acctbal);
 
