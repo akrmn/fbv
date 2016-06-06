@@ -1,5 +1,5 @@
 \i i11.sql
 \i q11improved.sql
 
-EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)
-EXECUTE q11Improved (15, '%BRASS', 'EUROPE');
+explain (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)
+execute q11improved (15, '%BRASS', 'EUROPE');

@@ -1,7 +1,7 @@
 /* Q11 Proveedor con el minimo costo (Original) */
 /* $1 = 15, $2 = '%BRASS', $3 = 'EUROPE' */
 
-prepare q11Original as
+prepare q11original as
 select
   s_acctbal,
   s_name,

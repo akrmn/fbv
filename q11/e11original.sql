@@ -1,5 +1,5 @@
-drop index idx_p_size_reverse_type;
+\i d11.sql
 \i q11original.sql
 
-EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)
-EXECUTE q11Original (15, '%BRASS', 'EUROPE');
+explain (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)
+execute q11original (15, '%BRASS', 'EUROPE');

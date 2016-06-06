@@ -1,7 +1,7 @@
-/* Q11 Proveedor con el minimo costo (Original) */
+/* Q11 Proveedor con el minimo costo (Mejorado) */
 /* $1 = 15, $2 = '%BRASS', $3 = 'EUROPE' */
 
-prepare q11Improved as
+prepare q11improved as
 with minPerType as (
   select
     p_type             as mpt_type,
@@ -13,13 +13,15 @@ with minPerType as (
     nation,
     region
   where p_partkey          = ps_partkey
-    and s_suppkey          = ps_suppkey
+    and ps_suppkey         = s_suppkey
     and s_nationkey        = n_nationkey
     and n_regionkey        = r_regionkey
     and p_size             = $1
     and reverse(p_type) like reverse($2)
     and r_name             = $3
   group by
+    p_type
+  order by
     p_type
 )
 select
@@ -33,13 +35,13 @@ select
   s_comment
 from
   part,
-  supplier,
   partsupp,
+  supplier,
   nation,
   region,
   minPerType
 where p_partkey          = ps_partkey
-  and s_suppkey          = ps_suppkey
+  and ps_suppkey         = s_suppkey
   and s_nationkey        = n_nationkey
   and n_regionkey        = r_regionkey
   and p_size             = $1
@@ -64,13 +66,13 @@ with minPerType as (
     supplier,
     nation,
     region
-  where p_partkey          = ps_partkey
-    and s_suppkey          = ps_suppkey
-    and s_nationkey        = n_nationkey
-    and n_regionkey        = r_regionkey
-    and p_size             = 15
-    and reverse(p_type) like reverse('%BRASS')
-    and r_name             = 'EUROPE'
+  where p_partkey   = ps_partkey
+    and s_suppkey   = ps_suppkey
+    and s_nationkey = n_nationkey
+    and n_regionkey = r_regionkey
+    and p_size      = 15
+    and p_type   like '%BRASS'
+    and r_name      = 'EUROPE'
   group by
     p_type
 )
@@ -85,8 +87,8 @@ select
   s_comment
 from
   part,
-  supplier,
   partsupp,
+  supplier,
   nation,
   region,
   minPerType
@@ -95,7 +97,6 @@ where p_partkey          = ps_partkey
   and s_nationkey        = n_nationkey
   and n_regionkey        = r_regionkey
   and p_size             = 15
-  and reverse(p_type) like reverse('%BRASS')
   and r_name             = 'EUROPE'
   and p_type             = mpt_type
   and ps_supplycost      = mpt_minCost
