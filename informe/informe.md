@@ -1,6 +1,6 @@
 ---
 papersize: letter
-geometry: margin=1.25in
+geometry: margin=1in
 documentclass: article
 fontsize: 12pt
 toc: true
@@ -67,8 +67,41 @@ De esta consulta se obtuvieron los resultados de la tabla 1.
 
 : Tuplas, páginas y tuplas por página de las tablas de FBV
 
-![Cantidad de tuplas en cada tabla](
-https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png)
+\begin{center}
+Figura 1: Cantidad de tuplas en cada tabla
+
+\begin{tikzpicture}
+\begin{axis}[
+height=6cm,
+width=12cm,  
+  ymin=0,
+  axis y line*=left,
+  axis x line*=bottom,
+  xticklabels={
+    \texttt{part},
+    \texttt{supplier},
+    \texttt{partusupp},
+    \texttt{lineitem}, 
+    \texttt{region},
+    \texttt{nation},
+    \texttt{customer},
+    \texttt{orders}},
+  xtick={1,...,8},
+  x tick label style={rotate=50,anchor=east}]
+\addplot[ybar,fill=gray]
+coordinates {
+(8, 1500000)
+(7, 150000)
+(6, 25)
+(5, 5)
+(4, 6001181)
+(3, 800000)
+(2, 10000)
+(1, 200000)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
 
 En la figura 1 podemos observar que la tabla de `lineitem` ocupa la mayor parte
 de los datos almacenados (aproximadamente un 69% del total de tuplas).
@@ -190,24 +223,42 @@ son `l_linestatus`, `l_returnflag` y `l_shipsintruct`. Por otro lado, los
 atributos con mayor selectividad tenemos `l_comment`, `l_orderkey` y
 `l_extendedprice`.
 
-| atributo          | Tam. prom. | # vals. dist. | Correlación  | Cota sup.   | Selectividad    |
-|-------------------|------------|---------------|--------------|-------------|-----------------|
-| `l_orderkey`      | 4          | 1206300       | 1            | 0.000016667 | 0.000000829     |
-| `l_partkey`       | 4          | 197029        | 0.00235099   | 0.00003     | 5.0753949E-06   |
-| `l_suppkey`       | 4          | 10000         | -0.000106049 | 0.000173333 | 0.0001          |
-| `l_linenumber`    | 4          | 7             | 0.176068     | 0.250317    | 0.1428571429    |
-| `l_quantity`      | 5          | 50            | 0.0195651    | 0.0205067   | 0.02            |
-| `l_extendedprice` | 8          | 767024        | 0.000341259  | 2.33333E-05 | 1.303740162E-06 |
-| `l_discount`      | 4          | 11            | 0.0868008    | 0.0922367   | 0.0909090909    |
-| `l_tax`           | 4          | 9             | 0.109181     | 0.11199     | 0.1111111111    |
-| `l_returnflag`    | 2          | 3             | 0.377041     | 0.506517    | 0.3333333333    |
-| `l_linestatus`    | 2          | 2             | 0.499747     | 0.500087    | 0.5             |
-| `l_shipdate`      | 4          | 2525          | -0.00126623  | 0.000536667 | 0.0003960396    |
-| `l_comitdate`     | 4          | 2465          | -0.00119272  | 0.000536667 | 0.0004056795    |
-| `l_receipdate`    | 4          | 2543          | -0.00128363  | 0.000553333 | 0.0003932363    |
-| `l_shipinstruct`  | 13         | 4             | 0.250591     | 0.250767    | 0.25            |
-| `l_shipmode`      | 5          | 7             | 0.145059     | 0.143523    | 0.1428571429    |
-| `l_comment`       | 27         | 1763690       | 0.000151724  | 0.000193333 | 0.000000567     |
+| Atributo          | Tam. pr. | # vals. dist. | Correlación  | Cota sup.   | Selectividad  |
+|-------------------|----------|---------------|--------------|-------------|---------------|
+| `l_orderkey`      | 4        | 1206300       | 1            | 0.000016667 | 0.000000829   |
+| `l_partkey`       | 4        | 197029        | 0.00235099   | 0.00003     | 5.07539E-06   |
+| `l_suppkey`       | 4        | 10000         | -0.000106049 | 0.000173333 | 0.0001        |
+| `l_linenumber`    | 4        | 7             | 0.176068     | 0.250317    | 0.14285714    |
+| `l_quantity`      | 5        | 50            | 0.0195651    | 0.0205067   | 0.02          |
+| `l_extendedprice` | 8        | 767024        | 0.000341259  | 2.33333E-05 | 1.3037401E-06 |
+| `l_discount`      | 4        | 11            | 0.0868008    | 0.0922367   | 0.09090909    |
+| `l_tax`           | 4        | 9             | 0.109181     | 0.11199     | 0.11111111    |
+| `l_returnflag`    | 2        | 3             | 0.377041     | 0.506517    | 0.33333333    |
+| `l_linestatus`    | 2        | 2             | 0.499747     | 0.500087    | 0.5           |
+| `l_shipdate`      | 4        | 2525          | -0.00126623  | 0.000536667 | 0.00039603    |
+| `l_comitdate`     | 4        | 2465          | -0.00119272  | 0.000536667 | 0.00040567    |
+| `l_receipdate`    | 4        | 2543          | -0.00128363  | 0.000553333 | 0.00039323    |
+| `l_shipinstruct`  | 13       | 4             | 0.250591     | 0.250767    | 0.25          |
+| `l_shipmode`      | 5        | 7             | 0.145059     | 0.143523    | 0.14285714    |
+| `l_comment`       | 27       | 1763690       | 0.000151724  | 0.000193333 | 0.000000567   |
 
-: Resultados obtenidos para lineitem
+: Estadísticas para la relación `lineitem`
 
+### Análisis de `orders`
+
+Al ejecutar la consulta sobre orders, se obtuvieron los resultados mostrados en
+la Tabla 4.
+
+| Atributo          | Tam. pr. | # vals. Dist. | Correlación | Cota sup.   | Selectividad     |
+|-------------------|----------|---------------|-------------|-------------|------------------|
+| `o_orderkey`      | 4        | -1            | 0.999999    | -           | 6.666666667E-07  |
+| `o_comment`       | 49       | 1461050       | 0.000667332 | 1.33333E-05 | 6.844383362E-07  |
+| `o_totalprice`    | 8        | 1439660       | 0.00179892  | 0.00001     | 6.9460989666E-07 |
+| `o_custkey`       | 4        | 96824         | 0.00212814  | 4.66667E-05 | 0.000010328      |
+| `o_orderdate`     | 4        | 2406          | 0.00254059  | 0.00056     | 0.0004156276     |
+| `o_clerk`         | 16       | 1000          | 0.000855419 | 0.00118     | 0.001            |
+| `o_orderpriority` | 9        | 5             | 0.201246    | 0.201113    | 0.2              |
+| `o_orderstatus`   | 2        | 3             | 0.476312    | 0.488067    | 0.3333333333     |
+| `o_shippriority`  | 4        | 1             | 1           | 1           | 1                |
+
+: Estadísticas para la relación `orders`
