@@ -137,6 +137,7 @@ $endif$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[spanish, es-tabla]{babel}
+\usepackage{forest}
 
 \usepackage{lscape}
 \usepackage{pgfplots}
@@ -144,6 +145,10 @@ $endif$
 \pgfplotsset{width=10cm,compat=1.9}
 \newcommand{\blandscape}{\begin{landscape}}
 \newcommand{\elandscape}{\end{landscape}}
+
+\forestset{qtree/.style={for tree={align=center}}}
+\usepackage{flexisym}
+
 
 $if(title)$
 \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}

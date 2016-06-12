@@ -1,0 +1,13 @@
+    Sort
+        Aggregate
+            Sort
+                Hash Join
+                    Hash Join
+                        Hash Join
+                            Seq Scan
+                            Hash
+                                Seq Scan
+                        Hash
+                            Seq Scan
+                    Hash
+                        Seq Scan

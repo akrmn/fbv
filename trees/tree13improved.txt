@@ -1,0 +1,13 @@
+    Sort
+        Aggregate
+            Sort
+                Hash Join
+                    Merge Join
+                        Index Scan
+                        Sort
+                            Merge Join
+                                Sort
+                                    Index Only Scan
+                                Index Only Scan
+                    Hash
+                        Seq Scan
