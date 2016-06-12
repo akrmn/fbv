@@ -1,5 +1,0 @@
-    Sort
-        Aggregate
-            Nested Loop
-                Index Only Scan
-                Index Only Scan

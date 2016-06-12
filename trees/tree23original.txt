@@ -1,8 +1,0 @@
-    Aggregate
-        Aggregate
-            Seq Scan
-        Sort
-            Hash Join
-                Seq Scan
-                Hash
-                    Seq Scan
