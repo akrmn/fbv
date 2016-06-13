@@ -41,7 +41,7 @@ Para calcular el volumen total de cada tabla utilizamos la siguiente consulta:
       and b.relname= c.relname;
 ~~~
 
-De esta consulta se obtuvieron los resultados de la tabla 1.
+De esta consulta se obtuvieron los resultados de +@tab:general.
 
 | Tabla       | Tuplas  | Páginas | Tuplas por pagina |
 |-------------|--------:|--------:|------------------:|
@@ -54,14 +54,14 @@ De esta consulta se obtuvieron los resultados de la tabla 1.
 | `customer`  | 150000  | 3566    | 42                |
 | `orders`    | 1500000 | 25196   | 59                |
 
-: Tuplas, páginas y tuplas por página de las tablas de FBV
+: Tuplas, páginas y tuplas por página de las tablas de FBV. {#tbl:general}
 
-![Cantidad de tuplas en cada tabla](static/sizechart.pdf)
+![Cantidad de tuplas en cada tabla](static/sizechart.pdf){#fig:sizes}
 
-En la figura 1 podemos observar que la tabla de `lineitem` ocupa la mayor parte
-de los datos almacenados (aproximadamente un 69% del total de tuplas).
-Cualquier consulta que requiera acceder a una buena parte de los datos
-almacenados en esta tabla exigirá mucha atención al momento de ser optimizada.
+En +@fig:sizes podemos observar que la tabla de `lineitem` ocupa la mayor parte
+de los datos almacenados (aproximadamente un 69% del total de tuplas). Cualquier
+consulta que requiera acceder a una buena parte de los datos almacenados en esta
+tabla exigirá mucha atención al momento de ser optimizada.
 
 Para las tablas `nation` y `region`, dado que caben en una sola página, se puede
 concluir que no necesitan optimización alguna pues un acceso directo es siempre
@@ -174,7 +174,7 @@ La consulta es la siguiente:
 ### Análisis de `lineitem`
 
 Al ejecutar la consulta sobre lineitem se obtuvieron los resultados mostrados en
-la Tabla 3. De la tabla se puede decir que las columnas con peor selectividad
++@tbl:lineitem. De la tabla se puede decir que las columnas con peor selectividad
 son `l_linestatus`, `l_returnflag` y `l_shipsintruct`. Por otro lado, los
 atributos con mayor selectividad tenemos `l_comment`, `l_orderkey` y
 `l_extendedprice`.
@@ -198,13 +198,13 @@ atributos con mayor selectividad tenemos `l_comment`, `l_orderkey` y
 | `l_shipmode`      | 5        | 7             | 0.145059     | 0.143523    | 0.14285714    |
 | `l_comment`       | 27       | 1763690       | 0.000151724  | 0.000193333 | 0.000000567   |
 
-: Estadísticas para la relación `lineitem`
+: Estadísticas para la relación `lineitem`. {#tbl:lineitem}
 
 
 ### Análisis de `orders`
 
 Al ejecutar la consulta sobre orders, se obtuvieron los resultados mostrados en
-la Tabla 4.
++@tbl:orders.
 
 | Atributo          | Tam. pr. | # vals. dist. | Correlación | Cota sup.   | Selectividad    |
 |-------------------|----------|---------------|-------------|-------------|-----------------|
@@ -218,13 +218,13 @@ la Tabla 4.
 | `o_orderstatus`   | 2        | 3             | 0.476312    | 0.488067    | 0.3333333333    |
 | `o_shippriority`  | 4        | 1             | 1           | 1           | 1               |
 
-: Estadísticas para la relación `orders`
+: Estadísticas para la relación `orders`. {#tbl:orders}
 
 
 ### Análisis de `customer`
 
 Al ejecutar la consulta sobre orders, se obtuvieron los resultados mostrados en
-la Tabla 5.
++@tbl:customer.
 
 | Atributo       | Tam. pr. | # vals. dist. | Correlación  | Cota sup.   | Selectividad    |
 |----------------|----------|---------------|--------------|-------------|-----------------|
@@ -237,13 +237,13 @@ la Tabla 5.
 | `c_nationkey`  | 4        | 25            | 0.0405429    | 0.0410733   | 0.04            |
 | `c_mktsegment` | 9        | 5             | 0.200573     | 0.20126     | 0.2             |
 
-: Estadísticas para la relación `customer`
+: Estadísticas para la relación `customer`. {#tbl:customer}
 
 
 ### Análisis de `part`
 
 Al ejecutar la consulta sobre part, se obtuvieron los resultados mostrados en
-la Tabla 6.
++@tbl:part.
 
 | Atributo        | Tam. pr. | # vals. dist. | Correlación  | Cota sup. | Selectividad    |
 |-----------------|----------|---------------|--------------|-----------|-----------------|
@@ -257,13 +257,13 @@ la Tabla 6.
 | `p_brand`       | 9        | 25            | 0.0414318    | 0.041165  | 0.04            |
 | `p_mfgr`        | 15       | 5             | 0.201261     | 0.20152   | 0.2             |
 
-: Estadísticas para la relación `part`
+: Estadísticas para la relación `part`. {#tbl:part}
 
 
 ### Análisis de `partsupplier`
 
 Al ejecutar la consulta sobre partsupplier, se obtuvieron los resultados mostrados en
-la Tabla 7.
++@tbl:partsupp.
 
 | Atributo        | Tam. pr. | # vals. dist. | Correlación  | Cota sup.   | Selectividad    |
 |-----------------|----------|---------------|--------------|-------------|-----------------|
@@ -273,13 +273,13 @@ la Tabla 7.
 | `ps_suppkey`    | 4        | 10000         | 0.00181275   | 0.000156667 | 0.0001          |
 | `ps_availqty`   | 4        | 9999          | 0.00135311   | 0.00018     | 0.0001000100010 |
 
-: Estadísticas para la relación `partsupplier`
+: Estadísticas para la relación `partsupplier`. {#tbl:partsupp}
 
 
 ### Análisis de `supplier`
 
 Al ejecutar la consulta sobre supplier, se obtuvieron los resultados mostrados en
-la Tabla 8.
++@tbl:supplier.
 
 | Atributo      | Tam. pr. | # vals. dist. | Correlación | Cota sup. | Selectividad |
 |---------------|----------|---------------|-------------|-----------|--------------|
@@ -291,13 +291,13 @@ la Tabla 8.
 | `s_acctbal`   | 6        | 9955          | 0.0158685   | 0.0002    | 0.0001004    |
 | `s_nationkey` | 4        | 25            | 0.0458266   | 0.0438    | 0.04         |
 
-: Estadísticas para la relación `supplier`
+: Estadísticas para la relación `supplier`. {#tbl:supplier}
 
 
 ### Análisis de `nation`
 
 Al ejecutar la consulta sobre nation, se obtuvieron los resultados mostrados en
-la Tabla 9.
++@tbl:nation.
 
 | Atributo      | Tam. pr. | # vals. dist. | Correlación | Cota sup. | Selectividad |
 |---------------|----------|---------------|-------------|-----------|--------------|
@@ -306,13 +306,13 @@ la Tabla 9.
 | `n_name`      | 8        | -1            | 0.913077    |           | 0.04         |
 | `n_regionkey` | 4        | 5             | 0.347692    | 0.2       | 0.2          |
 
-: Estadísticas para la relación `nation`
+: Estadísticas para la relación `nation`. {#tbl:nation}
 
 
 ### Análisis de `region`
 
 Al ejecutar la consulta sobre region, se obtuvieron los resultados mostrados en
-la Tabla 10.
++@tbl:region.
 
 | Atributo      | Tam. pr. | # vals. dist. | Correlación | Cota sup. | Selectividad |
 |---------------|----------|---------------|-------------|-----------|--------------|
@@ -320,4 +320,4 @@ la Tabla 10.
 | `r_name`      | 7        | -1            | 1           |           | 0.2          |
 | `r_comment`   | 67       | -1            | 0.6         |           | 0.2          |
 
-: Estadísticas para la relación `region`
+: Estadísticas para la relación `region`. {#tbl:region}

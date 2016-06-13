@@ -138,6 +138,7 @@ $endif$
 
 \usepackage[spanish, es-tabla]{babel}
 \usepackage{forest}
+\usepackage{cleveref}
 
 \usepackage{lscape}
 \usepackage{pgfplots}
