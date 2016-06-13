@@ -1,0 +1,714 @@
+- Plan: 
+    Node Type: "Sort"
+    Startup Cost: 39836.85
+    Total Cost: 39836.86
+    Plan Rows: 1
+    Plan Width: 180
+    Actual Startup Time: 1956.372
+    Actual Total Time: 1956.435
+    Actual Rows: 460
+    Actual Loops: 1
+    Output: 
+      - "supplier.s_acctbal"
+      - "supplier.s_name"
+      - "nation.n_name"
+      - "part.p_partkey"
+      - "part.p_mfgr"
+      - "supplier.s_address"
+      - "supplier.s_phone"
+      - "supplier.s_comment"
+    Sort Key: 
+      - "supplier.s_acctbal"
+      - "nation.n_name"
+      - "supplier.s_name"
+      - "part.p_partkey"
+    Sort Method: "quicksort"
+    Sort Space Used: 146
+    Sort Space Type: "Memory"
+    Shared Hit Blocks: 19749
+    Shared Read Blocks: 22870
+    Shared Dirtied Blocks: 1
+    Shared Written Blocks: 0
+    Local Hit Blocks: 0
+    Local Read Blocks: 0
+    Local Dirtied Blocks: 0
+    Local Written Blocks: 0
+    Temp Read Blocks: 3241
+    Temp Written Blocks: 3246
+    I/O Read Time: 0.000
+    I/O Write Time: 0.000
+    Plans: 
+      - Node Type: "Merge Join"
+        Parent Relationship: "Outer"
+        Join Type: "Inner"
+        Startup Cost: 29112.01
+        Total Cost: 39836.84
+        Plan Rows: 1
+        Plan Width: 180
+        Actual Startup Time: 1291.176
+        Actual Total Time: 1955.376
+        Actual Rows: 460
+        Actual Loops: 1
+        Output: 
+          - "supplier.s_acctbal"
+          - "supplier.s_name"
+          - "nation.n_name"
+          - "part.p_partkey"
+          - "part.p_mfgr"
+          - "supplier.s_address"
+          - "supplier.s_phone"
+          - "supplier.s_comment"
+        Merge Cond: "(part.p_partkey = partsupp.ps_partkey)"
+        Join Filter: "(partsupp.ps_supplycost = (SubPlan 1))"
+        Rows Removed by Join Filter: 182
+        Shared Hit Blocks: 19739
+        Shared Read Blocks: 22870
+        Shared Dirtied Blocks: 1
+        Shared Written Blocks: 0
+        Local Hit Blocks: 0
+        Local Read Blocks: 0
+        Local Dirtied Blocks: 0
+        Local Written Blocks: 0
+        Temp Read Blocks: 3241
+        Temp Written Blocks: 3246
+        I/O Read Time: 0.000
+        I/O Write Time: 0.000
+        Plans: 
+          - Node Type: "Index Scan"
+            Parent Relationship: "Outer"
+            Scan Direction: "Forward"
+            Index Name: "part_pkey"
+            Relation Name: "part"
+            Schema: "public"
+            Alias: "part"
+            Startup Cost: 0.42
+            Total Cost: 9924.12
+            Plan Rows: 824
+            Plan Width: 19
+            Actual Startup Time: 0.896
+            Actual Total Time: 233.315
+            Actual Rows: 747
+            Actual Loops: 1
+            Output: 
+              - "part.p_partkey"
+              - "part.p_name"
+              - "part.p_mfgr"
+              - "part.p_brand"
+              - "part.p_type"
+              - "part.p_size"
+              - "part.p_container"
+              - "part.p_retailprice"
+              - "part.p_comment"
+            Filter: "((part.p_type ~~ '%BRASS'::text) AND (part.p_size = 15))"
+            Rows Removed by Filter: 199253
+            Shared Hit Blocks: 42
+            Shared Read Blocks: 4258
+            Shared Dirtied Blocks: 0
+            Shared Written Blocks: 0
+            Local Hit Blocks: 0
+            Local Read Blocks: 0
+            Local Dirtied Blocks: 0
+            Local Written Blocks: 0
+            Temp Read Blocks: 0
+            Temp Written Blocks: 0
+            I/O Read Time: 0.000
+            I/O Write Time: 0.000
+          - Node Type: "Sort"
+            Parent Relationship: "Inner"
+            Startup Cost: 29111.59
+            Total Cost: 29121.21
+            Plan Rows: 3848
+            Plan Width: 171
+            Actual Startup Time: 1288.011
+            Actual Total Time: 1332.794
+            Actual Rows: 158755
+            Actual Loops: 1
+            Output: 
+              - "supplier.s_acctbal"
+              - "supplier.s_name"
+              - "supplier.s_address"
+              - "supplier.s_phone"
+              - "supplier.s_comment"
+              - "partsupp.ps_partkey"
+              - "partsupp.ps_supplycost"
+              - "nation.n_name"
+            Sort Key: 
+              - "partsupp.ps_partkey"
+            Sort Method: "external sort"
+            Sort Space Used: 25968
+            Sort Space Type: "Disk"
+            Shared Hit Blocks: 4
+            Shared Read Blocks: 17662
+            Shared Dirtied Blocks: 1
+            Shared Written Blocks: 0
+            Local Hit Blocks: 0
+            Local Read Blocks: 0
+            Local Dirtied Blocks: 0
+            Local Written Blocks: 0
+            Temp Read Blocks: 3241
+            Temp Written Blocks: 3246
+            I/O Read Time: 0.000
+            I/O Write Time: 0.000
+            Plans: 
+              - Node Type: "Hash Join"
+                Parent Relationship: "Outer"
+                Join Type: "Inner"
+                Startup Cost: 393.12
+                Total Cost: 28882.45
+                Plan Rows: 3848
+                Plan Width: 171
+                Actual Startup Time: 17.193
+                Actual Total Time: 1109.950
+                Actual Rows: 158960
+                Actual Loops: 1
+                Output: 
+                  - "supplier.s_acctbal"
+                  - "supplier.s_name"
+                  - "supplier.s_address"
+                  - "supplier.s_phone"
+                  - "supplier.s_comment"
+                  - "partsupp.ps_partkey"
+                  - "partsupp.ps_supplycost"
+                  - "nation.n_name"
+                Hash Cond: "(partsupp.ps_suppkey = supplier.s_suppkey)"
+                Shared Hit Blocks: 4
+                Shared Read Blocks: 17662
+                Shared Dirtied Blocks: 1
+                Shared Written Blocks: 0
+                Local Hit Blocks: 0
+                Local Read Blocks: 0
+                Local Dirtied Blocks: 0
+                Local Written Blocks: 0
+                Temp Read Blocks: 0
+                Temp Written Blocks: 0
+                I/O Read Time: 0.000
+                I/O Write Time: 0.000
+                Plans: 
+                  - Node Type: "Seq Scan"
+                    Parent Relationship: "Outer"
+                    Relation Name: "partsupp"
+                    Schema: "public"
+                    Alias: "partsupp"
+                    Startup Cost: 0.00
+                    Total Cost: 25451.00
+                    Plan Rows: 800000
+                    Plan Width: 14
+                    Actual Startup Time: 0.002
+                    Actual Total Time: 845.543
+                    Actual Rows: 800000
+                    Actual Loops: 1
+                    Output: 
+                      - "partsupp.ps_partkey"
+                      - "partsupp.ps_suppkey"
+                      - "partsupp.ps_availqty"
+                      - "partsupp.ps_supplycost"
+                      - "partsupp.ps_comment"
+                    Shared Hit Blocks: 2
+                    Shared Read Blocks: 17449
+                    Shared Dirtied Blocks: 0
+                    Shared Written Blocks: 0
+                    Local Hit Blocks: 0
+                    Local Read Blocks: 0
+                    Local Dirtied Blocks: 0
+                    Local Written Blocks: 0
+                    Temp Read Blocks: 0
+                    Temp Written Blocks: 0
+                    I/O Read Time: 0.000
+                    I/O Write Time: 0.000
+                  - Node Type: "Hash"
+                    Parent Relationship: "Inner"
+                    Startup Cost: 392.51
+                    Total Cost: 392.51
+                    Plan Rows: 48
+                    Plan Width: 165
+                    Actual Startup Time: 17.173
+                    Actual Total Time: 17.173
+                    Actual Rows: 1987
+                    Actual Loops: 1
+                    Output: 
+                      - "supplier.s_acctbal"
+                      - "supplier.s_name"
+                      - "supplier.s_address"
+                      - "supplier.s_phone"
+                      - "supplier.s_comment"
+                      - "supplier.s_suppkey"
+                      - "nation.n_name"
+                    Hash Buckets: 1024
+                    Hash Batches: 1
+                    Original Hash Batches: 1
+                    Peak Memory Usage: 346
+                    Shared Hit Blocks: 2
+                    Shared Read Blocks: 213
+                    Shared Dirtied Blocks: 1
+                    Shared Written Blocks: 0
+                    Local Hit Blocks: 0
+                    Local Read Blocks: 0
+                    Local Dirtied Blocks: 0
+                    Local Written Blocks: 0
+                    Temp Read Blocks: 0
+                    Temp Written Blocks: 0
+                    I/O Read Time: 0.000
+                    I/O Write Time: 0.000
+                    Plans: 
+                      - Node Type: "Hash Join"
+                        Parent Relationship: "Outer"
+                        Join Type: "Inner"
+                        Startup Cost: 41.52
+                        Total Cost: 392.51
+                        Plan Rows: 48
+                        Plan Width: 165
+                        Actual Startup Time: 1.162
+                        Actual Total Time: 16.153
+                        Actual Rows: 1987
+                        Actual Loops: 1
+                        Output: 
+                          - "supplier.s_acctbal"
+                          - "supplier.s_name"
+                          - "supplier.s_address"
+                          - "supplier.s_phone"
+                          - "supplier.s_comment"
+                          - "supplier.s_suppkey"
+                          - "nation.n_name"
+                        Hash Cond: "(supplier.s_nationkey = nation.n_nationkey)"
+                        Shared Hit Blocks: 2
+                        Shared Read Blocks: 213
+                        Shared Dirtied Blocks: 1
+                        Shared Written Blocks: 0
+                        Local Hit Blocks: 0
+                        Local Read Blocks: 0
+                        Local Dirtied Blocks: 0
+                        Local Written Blocks: 0
+                        Temp Read Blocks: 0
+                        Temp Written Blocks: 0
+                        I/O Read Time: 0.000
+                        I/O Write Time: 0.000
+                        Plans: 
+                          - Node Type: "Seq Scan"
+                            Parent Relationship: "Outer"
+                            Relation Name: "supplier"
+                            Schema: "public"
+                            Alias: "supplier"
+                            Startup Cost: 0.00
+                            Total Cost: 313.00
+                            Plan Rows: 10000
+                            Plan Width: 137
+                            Actual Startup Time: 0.002
+                            Actual Total Time: 12.413
+                            Actual Rows: 10000
+                            Actual Loops: 1
+                            Output: 
+                              - "supplier.s_suppkey"
+                              - "supplier.s_name"
+                              - "supplier.s_address"
+                              - "supplier.s_nationkey"
+                              - "supplier.s_phone"
+                              - "supplier.s_acctbal"
+                              - "supplier.s_comment"
+                            Shared Hit Blocks: 2
+                            Shared Read Blocks: 211
+                            Shared Dirtied Blocks: 0
+                            Shared Written Blocks: 0
+                            Local Hit Blocks: 0
+                            Local Read Blocks: 0
+                            Local Dirtied Blocks: 0
+                            Local Written Blocks: 0
+                            Temp Read Blocks: 0
+                            Temp Written Blocks: 0
+                            I/O Read Time: 0.000
+                            I/O Write Time: 0.000
+                          - Node Type: "Hash"
+                            Parent Relationship: "Inner"
+                            Startup Cost: 41.47
+                            Total Cost: 41.47
+                            Plan Rows: 4
+                            Plan Width: 36
+                            Actual Startup Time: 1.151
+                            Actual Total Time: 1.151
+                            Actual Rows: 5
+                            Actual Loops: 1
+                            Output: 
+                              - "nation.n_name"
+                              - "nation.n_nationkey"
+                            Hash Buckets: 1024
+                            Hash Batches: 1
+                            Original Hash Batches: 1
+                            Peak Memory Usage: 1
+                            Shared Hit Blocks: 0
+                            Shared Read Blocks: 2
+                            Shared Dirtied Blocks: 1
+                            Shared Written Blocks: 0
+                            Local Hit Blocks: 0
+                            Local Read Blocks: 0
+                            Local Dirtied Blocks: 0
+                            Local Written Blocks: 0
+                            Temp Read Blocks: 0
+                            Temp Written Blocks: 0
+                            I/O Read Time: 0.000
+                            I/O Write Time: 0.000
+                            Plans: 
+                              - Node Type: "Hash Join"
+                                Parent Relationship: "Outer"
+                                Join Type: "Inner"
+                                Startup Cost: 20.43
+                                Total Cost: 41.47
+                                Plan Rows: 4
+                                Plan Width: 36
+                                Actual Startup Time: 1.142
+                                Actual Total Time: 1.149
+                                Actual Rows: 5
+                                Actual Loops: 1
+                                Output: 
+                                  - "nation.n_name"
+                                  - "nation.n_nationkey"
+                                Hash Cond: "(nation.n_regionkey = region.r_regionkey)"
+                                Shared Hit Blocks: 0
+                                Shared Read Blocks: 2
+                                Shared Dirtied Blocks: 1
+                                Shared Written Blocks: 0
+                                Local Hit Blocks: 0
+                                Local Read Blocks: 0
+                                Local Dirtied Blocks: 0
+                                Local Written Blocks: 0
+                                Temp Read Blocks: 0
+                                Temp Written Blocks: 0
+                                I/O Read Time: 0.000
+                                I/O Write Time: 0.000
+                                Plans: 
+                                  - Node Type: "Seq Scan"
+                                    Parent Relationship: "Outer"
+                                    Relation Name: "nation"
+                                    Schema: "public"
+                                    Alias: "nation"
+                                    Startup Cost: 0.00
+                                    Total Cost: 18.00
+                                    Plan Rows: 800
+                                    Plan Width: 40
+                                    Actual Startup Time: 0.636
+                                    Actual Total Time: 0.640
+                                    Actual Rows: 25
+                                    Actual Loops: 1
+                                    Output: 
+                                      - "nation.n_nationkey"
+                                      - "nation.n_name"
+                                      - "nation.n_regionkey"
+                                      - "nation.n_comment"
+                                    Shared Hit Blocks: 0
+                                    Shared Read Blocks: 1
+                                    Shared Dirtied Blocks: 0
+                                    Shared Written Blocks: 0
+                                    Local Hit Blocks: 0
+                                    Local Read Blocks: 0
+                                    Local Dirtied Blocks: 0
+                                    Local Written Blocks: 0
+                                    Temp Read Blocks: 0
+                                    Temp Written Blocks: 0
+                                    I/O Read Time: 0.000
+                                    I/O Write Time: 0.000
+                                  - Node Type: "Hash"
+                                    Parent Relationship: "Inner"
+                                    Startup Cost: 20.38
+                                    Total Cost: 20.38
+                                    Plan Rows: 4
+                                    Plan Width: 4
+                                    Actual Startup Time: 0.494
+                                    Actual Total Time: 0.494
+                                    Actual Rows: 1
+                                    Actual Loops: 1
+                                    Output: 
+                                      - "region.r_regionkey"
+                                    Hash Buckets: 1024
+                                    Hash Batches: 1
+                                    Original Hash Batches: 1
+                                    Peak Memory Usage: 1
+                                    Shared Hit Blocks: 0
+                                    Shared Read Blocks: 1
+                                    Shared Dirtied Blocks: 1
+                                    Shared Written Blocks: 0
+                                    Local Hit Blocks: 0
+                                    Local Read Blocks: 0
+                                    Local Dirtied Blocks: 0
+                                    Local Written Blocks: 0
+                                    Temp Read Blocks: 0
+                                    Temp Written Blocks: 0
+                                    I/O Read Time: 0.000
+                                    I/O Write Time: 0.000
+                                    Plans: 
+                                      - Node Type: "Seq Scan"
+                                        Parent Relationship: "Outer"
+                                        Relation Name: "region"
+                                        Schema: "public"
+                                        Alias: "region"
+                                        Startup Cost: 0.00
+                                        Total Cost: 20.38
+                                        Plan Rows: 4
+                                        Plan Width: 4
+                                        Actual Startup Time: 0.491
+                                        Actual Total Time: 0.492
+                                        Actual Rows: 1
+                                        Actual Loops: 1
+                                        Output: 
+                                          - "region.r_regionkey"
+                                        Filter: "(region.r_name = 'EUROPE'::text)"
+                                        Rows Removed by Filter: 4
+                                        Shared Hit Blocks: 0
+                                        Shared Read Blocks: 1
+                                        Shared Dirtied Blocks: 1
+                                        Shared Written Blocks: 0
+                                        Local Hit Blocks: 0
+                                        Local Read Blocks: 0
+                                        Local Dirtied Blocks: 0
+                                        Local Written Blocks: 0
+                                        Temp Read Blocks: 0
+                                        Temp Written Blocks: 0
+                                        I/O Read Time: 0.000
+                                        I/O Write Time: 0.000
+          - Node Type: "Aggregate"
+            Strategy: "Plain"
+            Parent Relationship: "SubPlan"
+            Subplan Name: "SubPlan 1"
+            Startup Cost: 48.72
+            Total Cost: 48.73
+            Plan Rows: 1
+            Plan Width: 6
+            Actual Startup Time: 0.554
+            Actual Total Time: 0.555
+            Actual Rows: 1
+            Actual Loops: 642
+            Output: 
+              - "min(partsupp_1.ps_supplycost)"
+            Shared Hit Blocks: 19693
+            Shared Read Blocks: 950
+            Shared Dirtied Blocks: 0
+            Shared Written Blocks: 0
+            Local Hit Blocks: 0
+            Local Read Blocks: 0
+            Local Dirtied Blocks: 0
+            Local Written Blocks: 0
+            Temp Read Blocks: 0
+            Temp Written Blocks: 0
+            I/O Read Time: 0.000
+            I/O Write Time: 0.000
+            Plans: 
+              - Node Type: "Nested Loop"
+                Parent Relationship: "Outer"
+                Join Type: "Inner"
+                Startup Cost: 1.01
+                Total Cost: 48.71
+                Plan Rows: 1
+                Plan Width: 6
+                Actual Startup Time: 0.528
+                Actual Total Time: 0.552
+                Actual Rows: 2
+                Actual Loops: 642
+                Output: 
+                  - "partsupp_1.ps_supplycost"
+                Shared Hit Blocks: 19693
+                Shared Read Blocks: 950
+                Shared Dirtied Blocks: 0
+                Shared Written Blocks: 0
+                Local Hit Blocks: 0
+                Local Read Blocks: 0
+                Local Dirtied Blocks: 0
+                Local Written Blocks: 0
+                Temp Read Blocks: 0
+                Temp Written Blocks: 0
+                I/O Read Time: 0.000
+                I/O Write Time: 0.000
+                Plans: 
+                  - Node Type: "Nested Loop"
+                    Parent Relationship: "Outer"
+                    Join Type: "Inner"
+                    Startup Cost: 0.86
+                    Total Cost: 47.74
+                    Plan Rows: 4
+                    Plan Width: 10
+                    Actual Startup Time: 0.516
+                    Actual Total Time: 0.545
+                    Actual Rows: 4
+                    Actual Loops: 642
+                    Output: 
+                      - "partsupp_1.ps_supplycost"
+                      - "nation_1.n_regionkey"
+                    Shared Hit Blocks: 14558
+                    Shared Read Blocks: 949
+                    Shared Dirtied Blocks: 0
+                    Shared Written Blocks: 0
+                    Local Hit Blocks: 0
+                    Local Read Blocks: 0
+                    Local Dirtied Blocks: 0
+                    Local Written Blocks: 0
+                    Temp Read Blocks: 0
+                    Temp Written Blocks: 0
+                    I/O Read Time: 0.000
+                    I/O Write Time: 0.000
+                    Plans: 
+                      - Node Type: "Nested Loop"
+                        Parent Relationship: "Outer"
+                        Join Type: "Inner"
+                        Startup Cost: 0.71
+                        Total Cost: 47.01
+                        Plan Rows: 4
+                        Plan Width: 10
+                        Actual Startup Time: 0.514
+                        Actual Total Time: 0.536
+                        Actual Rows: 4
+                        Actual Loops: 642
+                        Output: 
+                          - "partsupp_1.ps_supplycost"
+                          - "supplier_1.s_nationkey"
+                        Shared Hit Blocks: 9423
+                        Shared Read Blocks: 948
+                        Shared Dirtied Blocks: 0
+                        Shared Written Blocks: 0
+                        Local Hit Blocks: 0
+                        Local Read Blocks: 0
+                        Local Dirtied Blocks: 0
+                        Local Written Blocks: 0
+                        Temp Read Blocks: 0
+                        Temp Written Blocks: 0
+                        I/O Read Time: 0.000
+                        I/O Write Time: 0.000
+                        Plans: 
+                          - Node Type: "Index Scan"
+                            Parent Relationship: "Outer"
+                            Scan Direction: "Forward"
+                            Index Name: "partsupp_pkey"
+                            Relation Name: "partsupp"
+                            Schema: "public"
+                            Alias: "partsupp_1"
+                            Startup Cost: 0.42
+                            Total Cost: 13.75
+                            Plan Rows: 4
+                            Plan Width: 10
+                            Actual Startup Time: 0.507
+                            Actual Total Time: 0.513
+                            Actual Rows: 4
+                            Actual Loops: 642
+                            Output: 
+                              - "partsupp_1.ps_partkey"
+                              - "partsupp_1.ps_suppkey"
+                              - "partsupp_1.ps_availqty"
+                              - "partsupp_1.ps_supplycost"
+                              - "partsupp_1.ps_comment"
+                            Index Cond: "(part.p_partkey = partsupp_1.ps_partkey)"
+                            Rows Removed by Index Recheck: 0
+                            Shared Hit Blocks: 1731
+                            Shared Read Blocks: 922
+                            Shared Dirtied Blocks: 0
+                            Shared Written Blocks: 0
+                            Local Hit Blocks: 0
+                            Local Read Blocks: 0
+                            Local Dirtied Blocks: 0
+                            Local Written Blocks: 0
+                            Temp Read Blocks: 0
+                            Temp Written Blocks: 0
+                            I/O Read Time: 0.000
+                            I/O Write Time: 0.000
+                          - Node Type: "Index Scan"
+                            Parent Relationship: "Inner"
+                            Scan Direction: "Forward"
+                            Index Name: "supplier_pkey"
+                            Relation Name: "supplier"
+                            Schema: "public"
+                            Alias: "supplier_1"
+                            Startup Cost: 0.29
+                            Total Cost: 8.30
+                            Plan Rows: 1
+                            Plan Width: 8
+                            Actual Startup Time: 0.004
+                            Actual Total Time: 0.004
+                            Actual Rows: 1
+                            Actual Loops: 2568
+                            Output: 
+                              - "supplier_1.s_suppkey"
+                              - "supplier_1.s_name"
+                              - "supplier_1.s_address"
+                              - "supplier_1.s_nationkey"
+                              - "supplier_1.s_phone"
+                              - "supplier_1.s_acctbal"
+                              - "supplier_1.s_comment"
+                            Index Cond: "(supplier_1.s_suppkey = partsupp_1.ps_suppkey)"
+                            Rows Removed by Index Recheck: 0
+                            Shared Hit Blocks: 7692
+                            Shared Read Blocks: 26
+                            Shared Dirtied Blocks: 0
+                            Shared Written Blocks: 0
+                            Local Hit Blocks: 0
+                            Local Read Blocks: 0
+                            Local Dirtied Blocks: 0
+                            Local Written Blocks: 0
+                            Temp Read Blocks: 0
+                            Temp Written Blocks: 0
+                            I/O Read Time: 0.000
+                            I/O Write Time: 0.000
+                      - Node Type: "Index Scan"
+                        Parent Relationship: "Inner"
+                        Scan Direction: "Forward"
+                        Index Name: "nation_pkey"
+                        Relation Name: "nation"
+                        Schema: "public"
+                        Alias: "nation_1"
+                        Startup Cost: 0.15
+                        Total Cost: 0.17
+                        Plan Rows: 1
+                        Plan Width: 8
+                        Actual Startup Time: 0.001
+                        Actual Total Time: 0.001
+                        Actual Rows: 1
+                        Actual Loops: 2568
+                        Output: 
+                          - "nation_1.n_nationkey"
+                          - "nation_1.n_name"
+                          - "nation_1.n_regionkey"
+                          - "nation_1.n_comment"
+                        Index Cond: "(nation_1.n_nationkey = supplier_1.s_nationkey)"
+                        Rows Removed by Index Recheck: 0
+                        Shared Hit Blocks: 5135
+                        Shared Read Blocks: 1
+                        Shared Dirtied Blocks: 0
+                        Shared Written Blocks: 0
+                        Local Hit Blocks: 0
+                        Local Read Blocks: 0
+                        Local Dirtied Blocks: 0
+                        Local Written Blocks: 0
+                        Temp Read Blocks: 0
+                        Temp Written Blocks: 0
+                        I/O Read Time: 0.000
+                        I/O Write Time: 0.000
+                  - Node Type: "Index Scan"
+                    Parent Relationship: "Inner"
+                    Scan Direction: "Forward"
+                    Index Name: "region_pkey"
+                    Relation Name: "region"
+                    Schema: "public"
+                    Alias: "region_1"
+                    Startup Cost: 0.15
+                    Total Cost: 0.23
+                    Plan Rows: 1
+                    Plan Width: 4
+                    Actual Startup Time: 0.001
+                    Actual Total Time: 0.001
+                    Actual Rows: 0
+                    Actual Loops: 2568
+                    Output: 
+                      - "region_1.r_regionkey"
+                      - "region_1.r_name"
+                      - "region_1.r_comment"
+                    Index Cond: "(region_1.r_regionkey = nation_1.n_regionkey)"
+                    Rows Removed by Index Recheck: 0
+                    Filter: "(region_1.r_name = 'EUROPE'::text)"
+                    Rows Removed by Filter: 1
+                    Shared Hit Blocks: 5135
+                    Shared Read Blocks: 1
+                    Shared Dirtied Blocks: 0
+                    Shared Written Blocks: 0
+                    Local Hit Blocks: 0
+                    Local Read Blocks: 0
+                    Local Dirtied Blocks: 0
+                    Local Written Blocks: 0
+                    Temp Read Blocks: 0
+                    Temp Written Blocks: 0
+                    I/O Read Time: 0.000
+                    I/O Write Time: 0.000
+  Triggers: 
+  Execution Time: 1960.079

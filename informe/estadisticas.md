@@ -1,14 +1,3 @@
----
-papersize: letter
-geometry: margin=1in
-documentclass: article
-fontsize: 12pt
-toc: true
-toc-depth: 2
-...
-
-\newpage
-
 # Estadísticas sobre la base de datos FBV
 
 El primer paso pasa poder optimizar las consultas dadas es conocer el volumen
@@ -67,41 +56,7 @@ De esta consulta se obtuvieron los resultados de la tabla 1.
 
 : Tuplas, páginas y tuplas por página de las tablas de FBV
 
-\begin{center}
-Figura 1: Cantidad de tuplas en cada tabla
-
-\begin{tikzpicture}
-\begin{axis}[
-height=6cm,
-width=12cm,
-  ymin=0,
-  axis y line*=left,
-  axis x line*=bottom,
-  xticklabels={
-    \texttt{part},
-    \texttt{supplier},
-    \texttt{partusupp},
-    \texttt{lineitem},
-    \texttt{region},
-    \texttt{nation},
-    \texttt{customer},
-    \texttt{orders}},
-  xtick={1,...,8},
-  x tick label style={rotate=50,anchor=east}]
-\addplot[ybar,fill=gray]
-coordinates {
-(8, 1500000)
-(7, 150000)
-(6, 25)
-(5, 5)
-(4, 6001181)
-(3, 800000)
-(2, 10000)
-(1, 200000)
-};
-\end{axis}
-\end{tikzpicture}
-\end{center}
+![Cantidad de tuplas en cada tabla](static/sizechart.pdf)
 
 En la figura 1 podemos observar que la tabla de `lineitem` ocupa la mayor parte
 de los datos almacenados (aproximadamente un 69% del total de tuplas).
@@ -365,6 +320,4 @@ la Tabla 10.
 | `r_name`      | 7        | -1            | 1           |           | 0.2          |
 | `r_comment`   | 67       | -1            | 0.6         |           | 0.2          |
 
-  : Estadísticas para la relación `region`
-
-# Optimización de las consultas
+: Estadísticas para la relación `region`

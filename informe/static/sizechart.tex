@@ -1,0 +1,39 @@
+\documentclass{standalone}
+
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+height=6cm,
+width=12cm,
+  ymin=0,
+  axis y line*=left,
+  axis x line*=bottom,
+  xticklabels={
+    \texttt{part},
+    \texttt{supplier},
+    \texttt{partusupp},
+    \texttt{lineitem},
+    \texttt{region},
+    \texttt{nation},
+    \texttt{customer},
+    \texttt{orders}},
+  xtick={1,...,8},
+  x tick label style={rotate=50,anchor=east}]
+\addplot[ybar,fill=gray]
+coordinates {
+(8, 1500000)
+(7, 150000)
+(6, 25)
+(5, 5)
+(4, 6001181)
+(3, 800000)
+(2, 10000)
+(1, 200000)
+};
+\end{axis}
+\end{tikzpicture}
+\end{document}
