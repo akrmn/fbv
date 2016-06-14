@@ -5,7 +5,7 @@ prepare q11improved as
 with minPerPart as (
   select
     min(ps_supplycost) as mpp_mincost,
-    p_partkey          as mpp_partkey
+    p_partkey          as mpp_partkey /* ps? */
   from
     part,
     partsupp,
@@ -40,14 +40,14 @@ from
   nation,
   region,
   minPerPart
-where p_partkey     = ps_partkey
-  and ps_suppkey    = s_suppkey
-  and s_nationkey   = n_nationkey
-  and p_size        = $1
-  and p_type     like $2
-  and r_name        = $3
-  and ps_supplycost = mpp_mincost
-  and p_partkey     = mpp_partkey
+where p_partkey          = ps_partkey
+  and ps_suppkey         = s_suppkey
+  and s_nationkey        = n_nationkey
+  and p_size             = $1
+  and reverse(p_type) like reverse($2)
+  and r_name             = $3
+  and ps_supplycost      = mpp_mincost
+  and p_partkey          = mpp_partkey
 order by
   s_acctbal desc,
   n_name,

@@ -174,9 +174,9 @@ La consulta es la siguiente:
 ### Análisis de `lineitem`
 
 Al ejecutar la consulta sobre lineitem se obtuvieron los resultados mostrados en
-+@tbl:lineitem. De la tabla se puede decir que las columnas con peor selectividad
-son `l_linestatus`, `l_returnflag` y `l_shipsintruct`. Por otro lado, los
-atributos con mayor selectividad tenemos `l_comment`, `l_orderkey` y
++@tbl:lineitem. De la tabla se puede decir que las columnas con peor
+selectividad son `l_linestatus`, `l_returnflag` y `l_shipsintruct`. Por otro
+lado, los atributos con mayor selectividad tenemos `l_comment`, `l_orderkey` y
 `l_extendedprice`.
 
 | Atributo          | Tam. pr. | # vals. dist. | Correlación  | Cota sup.   | Selectividad  |

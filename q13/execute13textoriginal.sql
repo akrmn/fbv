@@ -1,0 +1,5 @@
+\i q13original.sql
+
+EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS)
+EXECUTE q13original('1993-10-01');
+
