@@ -4,8 +4,8 @@
     Total Cost: 39836.86
     Plan Rows: 1
     Plan Width: 180
-    Actual Startup Time: 1956.372
-    Actual Total Time: 1956.435
+    Actual Startup Time: 1997.972
+    Actual Total Time: 1998.038
     Actual Rows: 460
     Actual Loops: 1
     Output: 
@@ -27,7 +27,7 @@
     Sort Space Type: "Memory"
     Shared Hit Blocks: 19749
     Shared Read Blocks: 22870
-    Shared Dirtied Blocks: 1
+    Shared Dirtied Blocks: 0
     Shared Written Blocks: 0
     Local Hit Blocks: 0
     Local Read Blocks: 0
@@ -45,8 +45,8 @@
         Total Cost: 39836.84
         Plan Rows: 1
         Plan Width: 180
-        Actual Startup Time: 1291.176
-        Actual Total Time: 1955.376
+        Actual Startup Time: 1348.081
+        Actual Total Time: 1996.954
         Actual Rows: 460
         Actual Loops: 1
         Output: 
@@ -63,7 +63,7 @@
         Rows Removed by Join Filter: 182
         Shared Hit Blocks: 19739
         Shared Read Blocks: 22870
-        Shared Dirtied Blocks: 1
+        Shared Dirtied Blocks: 0
         Shared Written Blocks: 0
         Local Hit Blocks: 0
         Local Read Blocks: 0
@@ -85,8 +85,8 @@
             Total Cost: 9924.12
             Plan Rows: 824
             Plan Width: 19
-            Actual Startup Time: 0.896
-            Actual Total Time: 233.315
+            Actual Startup Time: 0.502
+            Actual Total Time: 368.537
             Actual Rows: 747
             Actual Loops: 1
             Output: 
@@ -119,8 +119,8 @@
             Total Cost: 29121.21
             Plan Rows: 3848
             Plan Width: 171
-            Actual Startup Time: 1288.011
-            Actual Total Time: 1332.794
+            Actual Startup Time: 1346.245
+            Actual Total Time: 1392.721
             Actual Rows: 158755
             Actual Loops: 1
             Output: 
@@ -139,7 +139,7 @@
             Sort Space Type: "Disk"
             Shared Hit Blocks: 4
             Shared Read Blocks: 17662
-            Shared Dirtied Blocks: 1
+            Shared Dirtied Blocks: 0
             Shared Written Blocks: 0
             Local Hit Blocks: 0
             Local Read Blocks: 0
@@ -157,8 +157,8 @@
                 Total Cost: 28882.45
                 Plan Rows: 3848
                 Plan Width: 171
-                Actual Startup Time: 17.193
-                Actual Total Time: 1109.950
+                Actual Startup Time: 10.241
+                Actual Total Time: 1166.671
                 Actual Rows: 158960
                 Actual Loops: 1
                 Output: 
@@ -173,7 +173,7 @@
                 Hash Cond: "(partsupp.ps_suppkey = supplier.s_suppkey)"
                 Shared Hit Blocks: 4
                 Shared Read Blocks: 17662
-                Shared Dirtied Blocks: 1
+                Shared Dirtied Blocks: 0
                 Shared Written Blocks: 0
                 Local Hit Blocks: 0
                 Local Read Blocks: 0
@@ -194,7 +194,7 @@
                     Plan Rows: 800000
                     Plan Width: 14
                     Actual Startup Time: 0.002
-                    Actual Total Time: 845.543
+                    Actual Total Time: 901.459
                     Actual Rows: 800000
                     Actual Loops: 1
                     Output: 
@@ -221,8 +221,8 @@
                     Total Cost: 392.51
                     Plan Rows: 48
                     Plan Width: 165
-                    Actual Startup Time: 17.173
-                    Actual Total Time: 17.173
+                    Actual Startup Time: 10.221
+                    Actual Total Time: 10.221
                     Actual Rows: 1987
                     Actual Loops: 1
                     Output: 
@@ -239,7 +239,7 @@
                     Peak Memory Usage: 346
                     Shared Hit Blocks: 2
                     Shared Read Blocks: 213
-                    Shared Dirtied Blocks: 1
+                    Shared Dirtied Blocks: 0
                     Shared Written Blocks: 0
                     Local Hit Blocks: 0
                     Local Read Blocks: 0
@@ -257,8 +257,8 @@
                         Total Cost: 392.51
                         Plan Rows: 48
                         Plan Width: 165
-                        Actual Startup Time: 1.162
-                        Actual Total Time: 16.153
+                        Actual Startup Time: 0.679
+                        Actual Total Time: 9.203
                         Actual Rows: 1987
                         Actual Loops: 1
                         Output: 
@@ -272,7 +272,7 @@
                         Hash Cond: "(supplier.s_nationkey = nation.n_nationkey)"
                         Shared Hit Blocks: 2
                         Shared Read Blocks: 213
-                        Shared Dirtied Blocks: 1
+                        Shared Dirtied Blocks: 0
                         Shared Written Blocks: 0
                         Local Hit Blocks: 0
                         Local Read Blocks: 0
@@ -292,8 +292,8 @@
                             Total Cost: 313.00
                             Plan Rows: 10000
                             Plan Width: 137
-                            Actual Startup Time: 0.002
-                            Actual Total Time: 12.413
+                            Actual Startup Time: 0.001
+                            Actual Total Time: 5.911
                             Actual Rows: 10000
                             Actual Loops: 1
                             Output: 
@@ -322,8 +322,8 @@
                             Total Cost: 41.47
                             Plan Rows: 4
                             Plan Width: 36
-                            Actual Startup Time: 1.151
-                            Actual Total Time: 1.151
+                            Actual Startup Time: 0.667
+                            Actual Total Time: 0.667
                             Actual Rows: 5
                             Actual Loops: 1
                             Output: 
@@ -335,7 +335,7 @@
                             Peak Memory Usage: 1
                             Shared Hit Blocks: 0
                             Shared Read Blocks: 2
-                            Shared Dirtied Blocks: 1
+                            Shared Dirtied Blocks: 0
                             Shared Written Blocks: 0
                             Local Hit Blocks: 0
                             Local Read Blocks: 0
@@ -353,8 +353,8 @@
                                 Total Cost: 41.47
                                 Plan Rows: 4
                                 Plan Width: 36
-                                Actual Startup Time: 1.142
-                                Actual Total Time: 1.149
+                                Actual Startup Time: 0.658
+                                Actual Total Time: 0.664
                                 Actual Rows: 5
                                 Actual Loops: 1
                                 Output: 
@@ -363,7 +363,7 @@
                                 Hash Cond: "(nation.n_regionkey = region.r_regionkey)"
                                 Shared Hit Blocks: 0
                                 Shared Read Blocks: 2
-                                Shared Dirtied Blocks: 1
+                                Shared Dirtied Blocks: 0
                                 Shared Written Blocks: 0
                                 Local Hit Blocks: 0
                                 Local Read Blocks: 0
@@ -383,8 +383,8 @@
                                     Total Cost: 18.00
                                     Plan Rows: 800
                                     Plan Width: 40
-                                    Actual Startup Time: 0.636
-                                    Actual Total Time: 0.640
+                                    Actual Startup Time: 0.333
+                                    Actual Total Time: 0.336
                                     Actual Rows: 25
                                     Actual Loops: 1
                                     Output: 
@@ -410,8 +410,8 @@
                                     Total Cost: 20.38
                                     Plan Rows: 4
                                     Plan Width: 4
-                                    Actual Startup Time: 0.494
-                                    Actual Total Time: 0.494
+                                    Actual Startup Time: 0.313
+                                    Actual Total Time: 0.313
                                     Actual Rows: 1
                                     Actual Loops: 1
                                     Output: 
@@ -422,7 +422,7 @@
                                     Peak Memory Usage: 1
                                     Shared Hit Blocks: 0
                                     Shared Read Blocks: 1
-                                    Shared Dirtied Blocks: 1
+                                    Shared Dirtied Blocks: 0
                                     Shared Written Blocks: 0
                                     Local Hit Blocks: 0
                                     Local Read Blocks: 0
@@ -442,8 +442,8 @@
                                         Total Cost: 20.38
                                         Plan Rows: 4
                                         Plan Width: 4
-                                        Actual Startup Time: 0.491
-                                        Actual Total Time: 0.492
+                                        Actual Startup Time: 0.311
+                                        Actual Total Time: 0.311
                                         Actual Rows: 1
                                         Actual Loops: 1
                                         Output: 
@@ -452,7 +452,7 @@
                                         Rows Removed by Filter: 4
                                         Shared Hit Blocks: 0
                                         Shared Read Blocks: 1
-                                        Shared Dirtied Blocks: 1
+                                        Shared Dirtied Blocks: 0
                                         Shared Written Blocks: 0
                                         Local Hit Blocks: 0
                                         Local Read Blocks: 0
@@ -470,8 +470,8 @@
             Total Cost: 48.73
             Plan Rows: 1
             Plan Width: 6
-            Actual Startup Time: 0.554
-            Actual Total Time: 0.555
+            Actual Startup Time: 0.313
+            Actual Total Time: 0.313
             Actual Rows: 1
             Actual Loops: 642
             Output: 
@@ -496,8 +496,8 @@
                 Total Cost: 48.71
                 Plan Rows: 1
                 Plan Width: 6
-                Actual Startup Time: 0.528
-                Actual Total Time: 0.552
+                Actual Startup Time: 0.291
+                Actual Total Time: 0.311
                 Actual Rows: 2
                 Actual Loops: 642
                 Output: 
@@ -522,8 +522,8 @@
                     Total Cost: 47.74
                     Plan Rows: 4
                     Plan Width: 10
-                    Actual Startup Time: 0.516
-                    Actual Total Time: 0.545
+                    Actual Startup Time: 0.280
+                    Actual Total Time: 0.303
                     Actual Rows: 4
                     Actual Loops: 642
                     Output: 
@@ -549,8 +549,8 @@
                         Total Cost: 47.01
                         Plan Rows: 4
                         Plan Width: 10
-                        Actual Startup Time: 0.514
-                        Actual Total Time: 0.536
+                        Actual Startup Time: 0.278
+                        Actual Total Time: 0.295
                         Actual Rows: 4
                         Actual Loops: 642
                         Output: 
@@ -580,8 +580,8 @@
                             Total Cost: 13.75
                             Plan Rows: 4
                             Plan Width: 10
-                            Actual Startup Time: 0.507
-                            Actual Total Time: 0.513
+                            Actual Startup Time: 0.272
+                            Actual Total Time: 0.276
                             Actual Rows: 4
                             Actual Loops: 642
                             Output: 
@@ -615,8 +615,8 @@
                             Total Cost: 8.30
                             Plan Rows: 1
                             Plan Width: 8
-                            Actual Startup Time: 0.004
-                            Actual Total Time: 0.004
+                            Actual Startup Time: 0.003
+                            Actual Total Time: 0.003
                             Actual Rows: 1
                             Actual Loops: 2568
                             Output: 
@@ -711,4 +711,4 @@
                     I/O Read Time: 0.000
                     I/O Write Time: 0.000
   Triggers: 
-  Execution Time: 1960.079
+  Execution Time: 2001.949

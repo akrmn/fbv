@@ -1,0 +1,57 @@
+Sort  (cost=101999.41..102141.84 rows=56975 width=164) (actual time=2870.121..2883.728 rows=37967 loops=1)
+  Output: customer.c_custkey, customer.c_name, (sum((lineitem.l_extendedprice * (1::numeric - lineitem.l_discount)))), customer.c_acctbal, nation.n_name, customer.c_address, customer.c_phone, customer.c_comment
+  Sort Key: (sum((lineitem.l_extendedprice * (1::numeric - lineitem.l_discount))))
+  Sort Method: external merge  Disk: 6392kB
+  Buffers: shared hit=571 read=11486, temp read=4167 written=4167
+  ->  GroupAggregate  (cost=90543.94..92822.94 rows=56975 width=164) (actual time=2611.553..2768.250 rows=37967 loops=1)
+        Output: customer.c_custkey, customer.c_name, sum((lineitem.l_extendedprice * (1::numeric - lineitem.l_discount))), customer.c_acctbal, nation.n_name, customer.c_address, customer.c_phone, customer.c_comment
+        Group Key: customer.c_custkey, customer.c_name, customer.c_acctbal, customer.c_phone, nation.n_name, customer.c_address, customer.c_comment
+        Buffers: shared hit=566 read=11486, temp read=3366 written=3366
+        ->  Sort  (cost=90543.94..90686.38 rows=56975 width=164) (actual time=2611.520..2640.913 rows=114705 loops=1)
+              Output: customer.c_custkey, customer.c_name, customer.c_acctbal, nation.n_name, customer.c_address, customer.c_phone, customer.c_comment, lineitem.l_extendedprice, lineitem.l_discount
+              Sort Key: customer.c_custkey, customer.c_name, customer.c_acctbal, customer.c_phone, nation.n_name, customer.c_address, customer.c_comment
+              Sort Method: external sort  Disk: 19856kB
+              Buffers: shared hit=566 read=11486, temp read=3366 written=3366
+              ->  Hash Join  (cost=71878.58..81367.47 rows=56975 width=164) (actual time=923.451..1173.012 rows=114705 loops=1)
+                    Output: customer.c_custkey, customer.c_name, customer.c_acctbal, nation.n_name, customer.c_address, customer.c_phone, customer.c_comment, lineitem.l_extendedprice, lineitem.l_discount
+                    Hash Cond: (customer.c_nationkey = nation.n_nationkey)
+                    Buffers: shared hit=561 read=11486, temp read=884 written=884
+                    ->  Merge Join  (cost=71877.02..80582.50 rows=56975 width=160) (actual time=923.417..1114.032 rows=114705 loops=1)
+                          Output: customer.c_custkey, customer.c_name, customer.c_acctbal, customer.c_address, customer.c_phone, customer.c_comment, customer.c_nationkey, lineitem.l_extendedprice, lineitem.l_discount
+                          Merge Cond: (customer.c_custkey = orders.o_custkey)
+                          Buffers: shared hit=560 read=11486, temp read=884 written=884
+                          ->  Index Scan using customer_pkey on public.customer  (cost=0.42..7476.66 rows=150000 width=148) (actual time=0.005..81.936 rows=149996 loops=1)
+                                Output: customer.c_custkey, customer.c_name, customer.c_address, customer.c_nationkey, customer.c_phone, customer.c_acctbal, customer.c_mktsegment, customer.c_comment
+                                Buffers: shared hit=560 read=3972
+                          ->  Sort  (cost=71876.23..72018.67 rows=56975 width=16) (actual time=923.394..950.597 rows=114705 loops=1)
+                                Output: orders.o_custkey, lineitem.l_extendedprice, lineitem.l_discount
+                                Sort Key: orders.o_custkey
+                                Sort Method: external sort  Disk: 3528kB
+                                Buffers: shared read=7514, temp read=884 written=884
+                                ->  Merge Join  (cost=6488.39..67375.76 rows=56975 width=16) (actual time=43.419..803.786 rows=114705 loops=1)
+                                      Output: orders.o_custkey, lineitem.l_extendedprice, lineitem.l_discount
+                                      Merge Cond: (orders.o_orderkey = lineitem.l_orderkey)
+                                      Buffers: shared read=7514
+                                      ->  Sort  (cost=6487.83..6629.60 rows=56706 width=8) (actual time=39.825..52.643 rows=57069 loops=1)
+                                            Output: orders.o_custkey, orders.o_orderkey
+                                            Sort Key: orders.o_orderkey
+                                            Sort Method: quicksort  Memory: 4041kB
+                                            Buffers: shared read=223
+                                            ->  Index Only Scan using q13_orders_idx on public.orders  (cost=0.43..2010.55 rows=56706 width=8) (actual time=2.938..19.295 rows=57069 loops=1)
+                                                  Output: orders.o_custkey, orders.o_orderkey
+                                                  Index Cond: ((orders.o_orderdate >= '1993-10-01'::date) AND (orders.o_orderdate < '1994-01-01 00:00:00'::timestamp without time zone))
+                                                  Heap Fetches: 0
+                                                  Buffers: shared read=223
+                                      ->  Index Only Scan using q13_lineitem_idx on public.lineitem  (cost=0.56..56266.90 rows=1507105 width=16) (actual time=3.586..471.204 rows=1478866 loops=1)
+                                            Output: lineitem.l_returnflag, lineitem.l_orderkey, lineitem.l_extendedprice, lineitem.l_discount
+                                            Index Cond: (lineitem.l_returnflag = 'R'::text)
+                                            Heap Fetches: 0
+                                            Buffers: shared read=7291
+                    ->  Hash  (cost=1.25..1.25 rows=25 width=12) (actual time=0.017..0.017 rows=25 loops=1)
+                          Output: nation.n_name, nation.n_nationkey
+                          Buckets: 1024  Batches: 1  Memory Usage: 2kB
+                          Buffers: shared hit=1
+                          ->  Seq Scan on public.nation  (cost=0.00..1.25 rows=25 width=12) (actual time=0.002..0.009 rows=25 loops=1)
+                                Output: nation.n_name, nation.n_nationkey
+                                Buffers: shared hit=1
+Execution time: 2896.429 ms

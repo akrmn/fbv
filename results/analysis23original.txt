@@ -1,0 +1,35 @@
+GroupAggregate  (cost=85043.21..85061.31 rows=724 width=22) (actual time=3015.652..3018.583 rows=7 loops=1)
+  Output: ("substring"(customer.c_phone, 1, 2)), count(*), sum(customer.c_acctbal)
+  Group Key: ("substring"(customer.c_phone, 1, 2))
+  Buffers: shared hit=3576 read=28760, temp read=4266 written=4236
+  InitPlan 1 (returns $0)
+    ->  Aggregate  (cost=7140.43..7140.44 rows=1 width=6) (actual time=151.559..151.559 rows=1 loops=1)
+          Output: avg(customer_1.c_acctbal)
+          Buffers: shared hit=2 read=3564
+          ->  Seq Scan on public.customer customer_1  (cost=0.00..7128.50 rows=4772 width=6) (actual time=0.009..139.865 rows=38120 loops=1)
+                Output: customer_1.c_custkey, customer_1.c_name, customer_1.c_address, customer_1.c_nationkey, customer_1.c_phone, customer_1.c_acctbal, customer_1.c_mktsegment, customer_1.c_comment
+                Filter: ((customer_1.c_acctbal > 0.00) AND ("substring"(customer_1.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])))
+                Rows Removed by Filter: 111880
+                Buffers: shared hit=2 read=3564
+  ->  Sort  (cost=77902.77..77904.58 rows=724 width=22) (actual time=3015.169..3016.118 rows=6384 loops=1)
+        Output: ("substring"(customer.c_phone, 1, 2)), customer.c_acctbal
+        Sort Key: ("substring"(customer.c_phone, 1, 2))
+        Sort Method: quicksort  Memory: 492kB
+        Buffers: shared hit=3576 read=28760, temp read=4266 written=4236
+        ->  Hash Anti Join  (cost=64806.00..77868.38 rows=724 width=22) (actual time=2821.814..3010.179 rows=6384 loops=1)
+              Output: "substring"(customer.c_phone, 1, 2), customer.c_acctbal
+              Hash Cond: (customer.c_custkey = orders.o_custkey)
+              Buffers: shared hit=3571 read=28760, temp read=4266 written=4236
+              ->  Seq Scan on public.customer  (cost=0.00..7128.50 rows=1750 width=26) (actual time=151.583..217.417 rows=19000 loops=1)
+                    Output: customer.c_phone, customer.c_acctbal, customer.c_custkey
+                    Filter: ((customer.c_acctbal > $0) AND ("substring"(customer.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])))
+                    Rows Removed by Filter: 131000
+                    Buffers: shared hit=3568 read=3564
+              ->  Hash  (cost=40196.00..40196.00 rows=1500000 width=4) (actual time=2669.920..2669.920 rows=1500000 loops=1)
+                    Output: orders.o_custkey
+                    Buckets: 16384  Batches: 16  Memory Usage: 3379kB
+                    Buffers: shared read=25196, temp written=4108
+                    ->  Seq Scan on public.orders  (cost=0.00..40196.00 rows=1500000 width=4) (actual time=0.713..2277.181 rows=1500000 loops=1)
+                          Output: orders.o_custkey
+                          Buffers: shared read=25196
+Execution time: 3018.861 ms

@@ -4,8 +4,8 @@
     Total Cost: 102141.84
     Plan Rows: 56975
     Plan Width: 164
-    Actual Startup Time: 2871.208
-    Actual Total Time: 2885.389
+    Actual Startup Time: 2878.418
+    Actual Total Time: 2891.782
     Actual Rows: 37967
     Actual Loops: 1
     Output: 
@@ -42,8 +42,8 @@
         Total Cost: 92822.94
         Plan Rows: 56975
         Plan Width: 164
-        Actual Startup Time: 2609.774
-        Actual Total Time: 2769.258
+        Actual Startup Time: 2619.059
+        Actual Total Time: 2777.458
         Actual Rows: 37967
         Actual Loops: 1
         Output: 
@@ -82,8 +82,8 @@
             Total Cost: 90686.38
             Plan Rows: 56975
             Plan Width: 164
-            Actual Startup Time: 2609.744
-            Actual Total Time: 2639.509
+            Actual Startup Time: 2619.017
+            Actual Total Time: 2647.830
             Actual Rows: 114705
             Actual Loops: 1
             Output: 
@@ -127,8 +127,8 @@
                 Total Cost: 81367.47
                 Plan Rows: 56975
                 Plan Width: 164
-                Actual Startup Time: 929.985
-                Actual Total Time: 1184.026
+                Actual Startup Time: 923.239
+                Actual Total Time: 1175.823
                 Actual Rows: 114705
                 Actual Loops: 1
                 Output: 
@@ -162,8 +162,8 @@
                     Total Cost: 80582.50
                     Plan Rows: 56975
                     Plan Width: 160
-                    Actual Startup Time: 929.951
-                    Actual Total Time: 1126.611
+                    Actual Startup Time: 923.199
+                    Actual Total Time: 1118.977
                     Actual Rows: 114705
                     Actual Loops: 1
                     Output: 
@@ -202,7 +202,7 @@
                         Plan Rows: 150000
                         Plan Width: 148
                         Actual Startup Time: 0.006
-                        Actual Total Time: 90.209
+                        Actual Total Time: 90.054
                         Actual Rows: 149996
                         Actual Loops: 1
                         Output: 
@@ -232,8 +232,8 @@
                         Total Cost: 72018.67
                         Plan Rows: 56975
                         Plan Width: 16
-                        Actual Startup Time: 929.929
-                        Actual Total Time: 956.709
+                        Actual Startup Time: 923.176
+                        Actual Total Time: 949.896
                         Actual Rows: 114705
                         Actual Loops: 1
                         Output: 
@@ -265,8 +265,8 @@
                             Total Cost: 67375.76
                             Plan Rows: 56975
                             Plan Width: 16
-                            Actual Startup Time: 44.418
-                            Actual Total Time: 813.650
+                            Actual Startup Time: 43.965
+                            Actual Total Time: 803.581
                             Actual Rows: 114705
                             Actual Loops: 1
                             Output: 
@@ -293,8 +293,8 @@
                                 Total Cost: 6629.60
                                 Plan Rows: 56706
                                 Plan Width: 8
-                                Actual Startup Time: 39.577
-                                Actual Total Time: 52.312
+                                Actual Startup Time: 40.733
+                                Actual Total Time: 53.464
                                 Actual Rows: 57069
                                 Actual Loops: 1
                                 Output: 
@@ -329,8 +329,8 @@
                                     Total Cost: 2010.55
                                     Plan Rows: 56706
                                     Plan Width: 8
-                                    Actual Startup Time: 2.203
-                                    Actual Total Time: 19.445
+                                    Actual Startup Time: 3.767
+                                    Actual Total Time: 21.153
                                     Actual Rows: 57069
                                     Actual Loops: 1
                                     Output: 
@@ -362,8 +362,8 @@
                                 Total Cost: 56266.90
                                 Plan Rows: 1507105
                                 Plan Width: 16
-                                Actual Startup Time: 4.834
-                                Actual Total Time: 486.554
+                                Actual Startup Time: 3.225
+                                Actual Total Time: 485.605
                                 Actual Rows: 1478866
                                 Actual Loops: 1
                                 Output: 
@@ -392,8 +392,8 @@
                     Total Cost: 1.25
                     Plan Rows: 25
                     Plan Width: 12
-                    Actual Startup Time: 0.018
-                    Actual Total Time: 0.018
+                    Actual Startup Time: 0.023
+                    Actual Total Time: 0.023
                     Actual Rows: 25
                     Actual Loops: 1
                     Output: 
@@ -425,8 +425,8 @@
                         Total Cost: 1.25
                         Plan Rows: 25
                         Plan Width: 12
-                        Actual Startup Time: 0.003
-                        Actual Total Time: 0.007
+                        Actual Startup Time: 0.002
+                        Actual Total Time: 0.014
                         Actual Rows: 25
                         Actual Loops: 1
                         Output: 
@@ -445,4 +445,4 @@
                         I/O Read Time: 0.000
                         I/O Write Time: 0.000
   Triggers: 
-  Execution Time: 2895.150
+  Execution Time: 2903.682

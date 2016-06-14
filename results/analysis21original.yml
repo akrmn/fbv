@@ -4,8 +4,8 @@
     Total Cost: 304526.25
     Plan Rows: 1
     Plan Width: 14
-    Actual Startup Time: 15874.910
-    Actual Total Time: 15874.911
+    Actual Startup Time: 15856.784
+    Actual Total Time: 15856.784
     Actual Rows: 2
     Actual Loops: 1
     Output: 
@@ -37,8 +37,8 @@
         Total Cost: 304526.24
         Plan Rows: 1
         Plan Width: 14
-        Actual Startup Time: 15874.866
-        Actual Total Time: 15874.866
+        Actual Startup Time: 15856.738
+        Actual Total Time: 15856.738
         Actual Rows: 2
         Actual Loops: 1
         Output: 
@@ -67,8 +67,8 @@
             Total Cost: 304026.60
             Plan Rows: 28550
             Plan Width: 14
-            Actual Startup Time: 11929.357
-            Actual Total Time: 15846.692
+            Actual Startup Time: 11942.607
+            Actual Total Time: 15827.573
             Actual Rows: 30988
             Actual Loops: 1
             Output: 
@@ -100,7 +100,7 @@
                 Plan Rows: 1500000
                 Plan Width: 13
                 Actual Startup Time: 0.006
-                Actual Total Time: 3643.949
+                Actual Total Time: 3598.047
                 Actual Rows: 1499957
                 Actual Loops: 1
                 Output: 
@@ -131,8 +131,8 @@
                 Total Cost: 235760.08
                 Plan Rows: 28550
                 Plan Width: 9
-                Actual Startup Time: 11929.283
-                Actual Total Time: 11935.364
+                Actual Startup Time: 11942.541
+                Actual Total Time: 11948.431
                 Actual Rows: 30988
                 Actual Loops: 1
                 Output: 
@@ -165,8 +165,8 @@
                     Total Cost: 233575.84
                     Plan Rows: 28550
                     Plan Width: 9
-                    Actual Startup Time: 0.579
-                    Actual Total Time: 11909.581
+                    Actual Startup Time: 0.685
+                    Actual Total Time: 11922.855
                     Actual Rows: 30988
                     Actual Loops: 1
                     Output: 
@@ -187,4 +187,4 @@
                     I/O Read Time: 0.000
                     I/O Write Time: 0.000
   Triggers: 
-  Execution Time: 15876.735
+  Execution Time: 15858.726

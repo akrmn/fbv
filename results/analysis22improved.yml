@@ -4,8 +4,8 @@
     Total Cost: 47334.41
     Plan Rows: 2900
     Plan Width: 38
-    Actual Startup Time: 3624.336
-    Actual Total Time: 3627.088
+    Actual Startup Time: 3611.289
+    Actual Total Time: 3613.851
     Actual Rows: 18314
     Actual Loops: 1
     Output: 
@@ -41,8 +41,8 @@
         Total Cost: 47160.39
         Plan Rows: 2900
         Plan Width: 38
-        Actual Startup Time: 2937.534
-        Actual Total Time: 3382.921
+        Actual Startup Time: 2930.006
+        Actual Total Time: 3370.072
         Actual Rows: 18314
         Actual Loops: 1
         Output: 
@@ -73,8 +73,8 @@
             Total Cost: 46011.83
             Plan Rows: 111956
             Plan Width: 38
-            Actual Startup Time: 2937.480
-            Actual Total Time: 3312.037
+            Actual Startup Time: 2929.959
+            Actual Total Time: 3300.804
             Actual Rows: 118274
             Actual Loops: 1
             Output: 
@@ -109,8 +109,8 @@
                 Total Cost: 33280.49
                 Plan Rows: 111956
                 Plan Width: 38
-                Actual Startup Time: 51.871
-                Actual Total Time: 399.417
+                Actual Startup Time: 60.359
+                Actual Total Time: 407.395
                 Actual Rows: 118274
                 Actual Loops: 1
                 Output: 
@@ -139,8 +139,8 @@
                     Total Cost: 30017.38
                     Plan Rows: 112281
                     Plan Width: 38
-                    Actual Startup Time: 40.821
-                    Actual Total Time: 286.648
+                    Actual Startup Time: 42.698
+                    Actual Total Time: 297.837
                     Actual Rows: 118324
                     Actual Loops: 1
                     Output: 
@@ -170,8 +170,8 @@
                         Total Cost: 5430.56
                         Plan Rows: 28996
                         Plan Width: 38
-                        Actual Startup Time: 37.756
-                        Actual Total Time: 114.179
+                        Actual Startup Time: 40.785
+                        Actual Total Time: 124.807
                         Actual Rows: 29581
                         Actual Loops: 1
                         Output: 
@@ -205,13 +205,13 @@
                         Plans: 
                           - Node Type: "Bitmap Index Scan"
                             Parent Relationship: "Outer"
-                            Index Name: "idx_p_size_reverse_type"
+                            Index Name: "idx_q11_p_size_reverse_type"
                             Startup Cost: 0.00
                             Total Cost: 922.99
                             Plan Rows: 31413
                             Plan Width: 0
-                            Actual Startup Time: 37.199
-                            Actual Total Time: 37.199
+                            Actual Startup Time: 40.230
+                            Actual Total Time: 40.230
                             Actual Rows: 31826
                             Actual Loops: 1
                             Index Cond: "(part.p_size = ANY ('{49,14,23,45,19,3,36,9}'::integer[]))"
@@ -266,8 +266,8 @@
                     Total Cost: 338.00
                     Plan Rows: 9999
                     Plan Width: 4
-                    Actual Startup Time: 11.037
-                    Actual Total Time: 11.037
+                    Actual Startup Time: 17.638
+                    Actual Total Time: 17.638
                     Actual Rows: 9996
                     Actual Loops: 1
                     Output: 
@@ -299,7 +299,7 @@
                         Plan Rows: 9999
                         Plan Width: 4
                         Actual Startup Time: 0.008
-                        Actual Total Time: 8.425
+                        Actual Total Time: 15.047
                         Actual Rows: 9996
                         Actual Loops: 1
                         Output: 
@@ -319,4 +319,4 @@
                         I/O Read Time: 0.000
                         I/O Write Time: 0.000
   Triggers: 
-  Execution Time: 3631.476
+  Execution Time: 3617.930

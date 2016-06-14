@@ -5,8 +5,8 @@
     Total Cost: 8443.87
     Plan Rows: 759
     Plan Width: 22
-    Actual Startup Time: 442.084
-    Actual Total Time: 444.864
+    Actual Startup Time: 376.356
+    Actual Total Time: 379.034
     Actual Rows: 7
     Actual Loops: 1
     Output: 
@@ -36,8 +36,8 @@
         Total Cost: 4017.18
         Plan Rows: 1
         Plan Width: 6
-        Actual Startup Time: 150.768
-        Actual Total Time: 150.769
+        Actual Startup Time: 204.450
+        Actual Total Time: 204.450
         Actual Rows: 1
         Actual Loops: 1
         Output: 
@@ -64,8 +64,8 @@
             Total Cost: 4005.25
             Plan Rows: 4768
             Plan Width: 6
-            Actual Startup Time: 24.319
-            Actual Total Time: 137.969
+            Actual Startup Time: 15.526
+            Actual Total Time: 191.892
             Actual Rows: 38120
             Actual Loops: 1
             Output: 
@@ -96,13 +96,13 @@
             Plans: 
               - Node Type: "Bitmap Index Scan"
                 Parent Relationship: "Outer"
-                Index Name: "idx_c_ctrycode_acctbal"
+                Index Name: "idx_q23_c_ctrycode_acctbal"
                 Startup Cost: 0.00
                 Total Cost: 134.62
                 Plan Rows: 4768
                 Plan Width: 0
-                Actual Startup Time: 23.798
-                Actual Total Time: 23.798
+                Actual Startup Time: 14.993
+                Actual Total Time: 14.993
                 Actual Rows: 38120
                 Actual Loops: 1
                 Index Cond: "((\"substring\"(customer_1.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])) AND (customer_1.c_acctbal > 0.00))"
@@ -124,8 +124,8 @@
         Total Cost: 4409.61
         Plan Rows: 759
         Plan Width: 22
-        Actual Startup Time: 441.634
-        Actual Total Time: 442.523
+        Actual Startup Time: 375.915
+        Actual Total Time: 376.763
         Actual Rows: 6384
         Actual Loops: 1
         Output: 
@@ -156,8 +156,8 @@
             Total Cost: 4371.40
             Plan Rows: 759
             Plan Width: 22
-            Actual Startup Time: 154.454
-            Actual Total Time: 435.215
+            Actual Startup Time: 208.372
+            Actual Total Time: 369.591
             Actual Rows: 6384
             Actual Loops: 1
             Output: 
@@ -185,8 +185,8 @@
                 Total Cost: 3065.90
                 Plan Rows: 1750
                 Plan Width: 26
-                Actual Startup Time: 154.430
-                Actual Total Time: 163.735
+                Actual Startup Time: 208.343
+                Actual Total Time: 217.915
                 Actual Rows: 19000
                 Actual Loops: 1
                 Output: 
@@ -217,13 +217,13 @@
                 Plans: 
                   - Node Type: "Bitmap Index Scan"
                     Parent Relationship: "Outer"
-                    Index Name: "idx_c_ctrycode_acctbal"
+                    Index Name: "idx_q23_c_ctrycode_acctbal"
                     Startup Cost: 0.00
                     Total Cost: 48.45
                     Plan Rows: 1750
                     Plan Width: 0
-                    Actual Startup Time: 153.944
-                    Actual Total Time: 153.944
+                    Actual Startup Time: 207.823
+                    Actual Total Time: 207.823
                     Actual Rows: 19000
                     Actual Loops: 1
                     Index Cond: "((\"substring\"(customer.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])) AND (customer.c_acctbal > $0))"
@@ -242,7 +242,7 @@
               - Node Type: "Index Only Scan"
                 Parent Relationship: "Inner"
                 Scan Direction: "Forward"
-                Index Name: "idx_o_custkey"
+                Index Name: "idx_q23_o_custkey"
                 Relation Name: "orders"
                 Schema: "public"
                 Alias: "orders"
@@ -250,8 +250,8 @@
                 Total Cost: 4.04
                 Plan Rows: 18
                 Plan Width: 4
-                Actual Startup Time: 0.014
-                Actual Total Time: 0.014
+                Actual Startup Time: 0.007
+                Actual Total Time: 0.007
                 Actual Rows: 1
                 Actual Loops: 19000
                 Output: 
@@ -272,4 +272,4 @@
                 I/O Read Time: 0.000
                 I/O Write Time: 0.000
   Triggers: 
-  Execution Time: 445.059
+  Execution Time: 379.253
