@@ -5,7 +5,7 @@ prepare q11improved as
 with minPerPart as (
   select
     min(ps_supplycost) as mpp_mincost,
-    p_partkey          as mpp_partkey /* ps? */
+    ps_partkey         as mpp_partkey
   from
     part,
     partsupp,
