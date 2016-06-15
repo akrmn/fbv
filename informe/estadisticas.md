@@ -1,3 +1,4 @@
+\newpage
 # Estadísticas sobre la base de datos FBV
 
 El primer paso pasa poder optimizar las consultas dadas es conocer el volumen
