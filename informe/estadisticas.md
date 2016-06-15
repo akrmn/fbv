@@ -41,7 +41,7 @@ Para calcular el volumen total de cada tabla utilizamos la siguiente consulta:
       and b.relname= c.relname;
 ~~~
 
-De esta consulta se obtuvieron los resultados de +@tab:general.
+De esta consulta se obtuvieron los resultados de +@tab:general .
 
 | Tabla       | Tuplas  | Páginas | Tuplas por pagina |
 |-------------|--------:|--------:|------------------:|
