@@ -1,3 +1,4 @@
+\newpage
 # Estadísticas sobre la base de datos FBV
 
 El primer paso pasa poder optimizar las consultas dadas es conocer el volumen
@@ -41,7 +42,7 @@ Para calcular el volumen total de cada tabla utilizamos la siguiente consulta:
       and b.relname= c.relname;
 ~~~
 
-De esta consulta se obtuvieron los resultados de +@tab:general.
+De esta consulta se obtuvieron los resultados de +@tab:general .
 
 | Tabla       | Tuplas  | Páginas | Tuplas por pagina |
 |-------------|--------:|--------:|------------------:|
