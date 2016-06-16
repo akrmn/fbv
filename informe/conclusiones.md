@@ -1,3 +1,5 @@
+\newpage
+
 # Conclusiones
 
 El proyecto sirvió para reforzar y poner en práctica lo aprendido en clase sobre el diseño físico y la optimización de consultas. Se experimentaron y utilizaron técnicas de optimización de consultas como la creación de índices compuestos, reescritura de consultas, clustering, particionamiento y gestión de memoria de trabajo y *shared buffers*.
