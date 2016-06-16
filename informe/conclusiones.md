@@ -9,11 +9,11 @@ Cada integrante del equipo tomó una consulta de la primera parte y una de la se
 
 | Consulta | Tiempo original (ms) | Tiempo optimizado (ms) | Porcentaje de mejora |
 |----------|----------------------|------------------------|----------------------|
-| Q11      | 1997.197             | 414.329                |                      |
-| Q12      | 17932.438            | 2985.627               |                      |
-| Q13      | 17875.401            | 2903.682               |                      |
-| Q21      | 15858.726            | 3124.659               |                      |
-| Q22      | 4392.969             | 2700.308               |                      |
-| Q23      | 3019.109             | 379.253                |                      |
+| Q11      | 1997                 | 414                    |         79.26%       |
+| Q12      | 17932                | 2986                   |         83.34%       |
+| Q13      | 17875                | 2904                   |         83.75%       |
+| Q21      | 15859                | 3125                   |         80.30%       |
+| Q22      | 4393                 | 2700                   |         38.53%       |
+| Q23      | 3019                 | 379                    |         87.45%       |
 
-Como puede verse lo mucho que mejoraron las consultas, algunas mejorando hasta más del 90% sobre la consulta original. La mejora principal buscada en todas las consultas es crear índices para eliminar los *sequential scans* y sustituirlos por *index only scans*, los cuales son mucho más eficiente ya que solo consulta el índice y minimizan el número de I/Os necesarios, la causa principal del aumento de los tiempos de ejecución de las consultas. Al lograr que el plan de trabajo generera *index only scans*, se redujeron los tamaños y el optimizador seleccionó mejores algoritmos para realizar las operaciones `join`, y los únicos nodos que afectaban un poco los tiempos de ejecución fueron los de ordenamiento donde se utilizaron técnicas como el aumento de la memoria de trabajo para disminuir su impacto en el rendimiento de la consulta obteniendo así resultados favorables e ilustrando la importancia de la optimización como una de las tareas fundamentales para los administradores de bases de datos.
+Puede verse lo mucho que mejoraron las consultas, algunas mejorando hasta más del 80% sobre la consulta original. La mejora principal buscada en todas las consultas es crear índices para eliminar los *sequential scans* y sustituirlos por *index only scans*, los cuales son mucho más eficientes ya que solo consulta el índice y minimizan el número de I/Os necesarios, la causa principal del aumento de los tiempos de ejecución de las consultas. Al lograr que el plan de trabajo generera *index only scans*, se redujeron los tamaños de las selecciones y el optimizador seleccionó mejores algoritmos para realizar las operaciones `join`, y los únicos nodos que afectaban un poco los tiempos de ejecución fueron los de ordenamiento donde se utilizaron técnicas como el aumento de la memoria de trabajo para disminuir su impacto en el rendimiento de la consulta. Estos resultados muestran la importancia de la optimización de consultas entre las tareas esenciales para los administradores de bases de datos.
