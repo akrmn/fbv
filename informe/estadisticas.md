@@ -322,3 +322,4 @@ Al ejecutar la consulta sobre region, se obtuvieron los resultados mostrados en
 | `r_comment`   | 67       | -1            | 0.6         |           | 0.2          |
 
 : Estadísticas para la relación `region`. {#tbl:region}
+
