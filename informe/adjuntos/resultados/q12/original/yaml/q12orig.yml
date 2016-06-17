@@ -1,0 +1,307 @@
+- Plan: 
+    Node Type: "Sort"
+    Startup Cost: 350016.45
+    Total Cost: 350796.80
+    Plan Rows: 312139
+    Plan Width: 24
+    Actual Startup Time: 17927.911
+    Actual Total Time: 17929.565
+    Actual Rows: 11620
+    Actual Loops: 1
+    Output: 
+      - "lineitem.l_orderkey"
+      - "(sum((lineitem.l_extendedprice * (1::numeric - lineitem.l_discount))))"
+      - "orders.o_orderdate"
+      - "orders.o_shippriority"
+    Sort Key: 
+      - "(sum((lineitem.l_extendedprice * (1::numeric - lineitem.l_discount))))"
+      - "orders.o_orderdate"
+    Sort Method: "quicksort"
+    Sort Space Used: 1292
+    Sort Space Type: "Memory"
+    Shared Hit Blocks: 502492
+    Shared Read Blocks: 124387
+    Shared Dirtied Blocks: 0
+    Shared Written Blocks: 0
+    Local Hit Blocks: 0
+    Local Read Blocks: 0
+    Local Dirtied Blocks: 0
+    Local Written Blocks: 0
+    Temp Read Blocks: 0
+    Temp Written Blocks: 0
+    I/O Read Time: 0.000
+    I/O Write Time: 0.000
+    Plans: 
+      - Node Type: "Aggregate"
+        Strategy: "Sorted"
+        Parent Relationship: "Outer"
+        Startup Cost: 305765.24
+        Total Cost: 315129.41
+        Plan Rows: 312139
+        Plan Width: 24
+        Actual Startup Time: 17883.439
+        Actual Total Time: 17912.970
+        Actual Rows: 11620
+        Actual Loops: 1
+        Output: 
+          - "lineitem.l_orderkey"
+          - "sum((lineitem.l_extendedprice * (1::numeric - lineitem.l_discount)))"
+          - "orders.o_orderdate"
+          - "orders.o_shippriority"
+        Group Key: 
+          - "lineitem.l_orderkey"
+          - "orders.o_orderdate"
+          - "orders.o_shippriority"
+        Shared Hit Blocks: 502484
+        Shared Read Blocks: 124387
+        Shared Dirtied Blocks: 0
+        Shared Written Blocks: 0
+        Local Hit Blocks: 0
+        Local Read Blocks: 0
+        Local Dirtied Blocks: 0
+        Local Written Blocks: 0
+        Temp Read Blocks: 0
+        Temp Written Blocks: 0
+        I/O Read Time: 0.000
+        I/O Write Time: 0.000
+        Plans: 
+          - Node Type: "Sort"
+            Parent Relationship: "Outer"
+            Startup Cost: 305765.24
+            Total Cost: 306545.59
+            Plan Rows: 312139
+            Plan Width: 24
+            Actual Startup Time: 17882.787
+            Actual Total Time: 17886.887
+            Actual Rows: 30519
+            Actual Loops: 1
+            Output: 
+              - "lineitem.l_orderkey"
+              - "orders.o_orderdate"
+              - "orders.o_shippriority"
+              - "lineitem.l_extendedprice"
+              - "lineitem.l_discount"
+            Sort Key: 
+              - "lineitem.l_orderkey"
+              - "orders.o_orderdate"
+              - "orders.o_shippriority"
+            Sort Method: "quicksort"
+            Sort Space Used: 3153
+            Sort Space Type: "Memory"
+            Shared Hit Blocks: 502484
+            Shared Read Blocks: 124387
+            Shared Dirtied Blocks: 0
+            Shared Written Blocks: 0
+            Local Hit Blocks: 0
+            Local Read Blocks: 0
+            Local Dirtied Blocks: 0
+            Local Written Blocks: 0
+            Temp Read Blocks: 0
+            Temp Written Blocks: 0
+            I/O Read Time: 0.000
+            I/O Write Time: 0.000
+            Plans: 
+              - Node Type: "Nested Loop"
+                Parent Relationship: "Outer"
+                Join Type: "Inner"
+                Startup Cost: 5817.81
+                Total Cost: 270878.20
+                Plan Rows: 312139
+                Plan Width: 24
+                Actual Startup Time: 244.764
+                Actual Total Time: 17859.258
+                Actual Rows: 30519
+                Actual Loops: 1
+                Output: 
+                  - "lineitem.l_orderkey"
+                  - "orders.o_orderdate"
+                  - "orders.o_shippriority"
+                  - "lineitem.l_extendedprice"
+                  - "lineitem.l_discount"
+                Shared Hit Blocks: 502481
+                Shared Read Blocks: 124387
+                Shared Dirtied Blocks: 0
+                Shared Written Blocks: 0
+                Local Hit Blocks: 0
+                Local Read Blocks: 0
+                Local Dirtied Blocks: 0
+                Local Written Blocks: 0
+                Temp Read Blocks: 0
+                Temp Written Blocks: 0
+                I/O Read Time: 0.000
+                I/O Write Time: 0.000
+                Plans: 
+                  - Node Type: "Hash Join"
+                    Parent Relationship: "Outer"
+                    Join Type: "Inner"
+                    Startup Cost: 5817.38
+                    Total Cost: 59389.35
+                    Plan Rows: 145750
+                    Plan Width: 12
+                    Actual Startup Time: 243.688
+                    Actual Total Time: 1267.156
+                    Actual Rows: 147126
+                    Actual Loops: 1
+                    Output: 
+                      - "orders.o_orderdate"
+                      - "orders.o_shippriority"
+                      - "orders.o_orderkey"
+                    Hash Cond: "(orders.o_custkey = customer.c_custkey)"
+                    Shared Hit Blocks: 3
+                    Shared Read Blocks: 28759
+                    Shared Dirtied Blocks: 0
+                    Shared Written Blocks: 0
+                    Local Hit Blocks: 0
+                    Local Read Blocks: 0
+                    Local Dirtied Blocks: 0
+                    Local Written Blocks: 0
+                    Temp Read Blocks: 0
+                    Temp Written Blocks: 0
+                    I/O Read Time: 0.000
+                    I/O Write Time: 0.000
+                    Plans: 
+                      - Node Type: "Seq Scan"
+                        Parent Relationship: "Outer"
+                        Relation Name: "orders"
+                        Schema: "public"
+                        Alias: "orders"
+                        Startup Cost: 0.00
+                        Total Cost: 43946.00
+                        Plan Rows: 726087
+                        Plan Width: 16
+                        Actual Startup Time: 0.006
+                        Actual Total Time: 397.134
+                        Actual Rows: 727305
+                        Actual Loops: 1
+                        Output: 
+                          - "orders.o_orderkey"
+                          - "orders.o_custkey"
+                          - "orders.o_orderstatus"
+                          - "orders.o_totalprice"
+                          - "orders.o_orderdate"
+                          - "orders.o_orderpriority"
+                          - "orders.o_clerk"
+                          - "orders.o_shippriority"
+                          - "orders.o_comment"
+                        Filter: "(orders.o_orderdate < '1995-03-15'::date)"
+                        Rows Removed by Filter: 772695
+                        Shared Hit Blocks: 1
+                        Shared Read Blocks: 25195
+                        Shared Dirtied Blocks: 0
+                        Shared Written Blocks: 0
+                        Local Hit Blocks: 0
+                        Local Read Blocks: 0
+                        Local Dirtied Blocks: 0
+                        Local Written Blocks: 0
+                        Temp Read Blocks: 0
+                        Temp Written Blocks: 0
+                        I/O Read Time: 0.000
+                        I/O Write Time: 0.000
+                      - Node Type: "Hash"
+                        Parent Relationship: "Inner"
+                        Startup Cost: 5441.00
+                        Total Cost: 5441.00
+                        Plan Rows: 30110
+                        Plan Width: 4
+                        Actual Startup Time: 243.646
+                        Actual Total Time: 243.646
+                        Actual Rows: 30142
+                        Actual Loops: 1
+                        Output: 
+                          - "customer.c_custkey"
+                        Hash Buckets: 4096
+                        Hash Batches: 1
+                        Original Hash Batches: 1
+                        Peak Memory Usage: 1060
+                        Shared Hit Blocks: 2
+                        Shared Read Blocks: 3564
+                        Shared Dirtied Blocks: 0
+                        Shared Written Blocks: 0
+                        Local Hit Blocks: 0
+                        Local Read Blocks: 0
+                        Local Dirtied Blocks: 0
+                        Local Written Blocks: 0
+                        Temp Read Blocks: 0
+                        Temp Written Blocks: 0
+                        I/O Read Time: 0.000
+                        I/O Write Time: 0.000
+                        Plans: 
+                          - Node Type: "Seq Scan"
+                            Parent Relationship: "Outer"
+                            Relation Name: "customer"
+                            Schema: "public"
+                            Alias: "customer"
+                            Startup Cost: 0.00
+                            Total Cost: 5441.00
+                            Plan Rows: 30110
+                            Plan Width: 4
+                            Actual Startup Time: 0.003
+                            Actual Total Time: 234.851
+                            Actual Rows: 30142
+                            Actual Loops: 1
+                            Output: 
+                              - "customer.c_custkey"
+                            Filter: "(customer.c_mktsegment = 'BUILDING'::text)"
+                            Rows Removed by Filter: 119858
+                            Shared Hit Blocks: 2
+                            Shared Read Blocks: 3564
+                            Shared Dirtied Blocks: 0
+                            Shared Written Blocks: 0
+                            Local Hit Blocks: 0
+                            Local Read Blocks: 0
+                            Local Dirtied Blocks: 0
+                            Local Written Blocks: 0
+                            Temp Read Blocks: 0
+                            Temp Written Blocks: 0
+                            I/O Read Time: 0.000
+                            I/O Write Time: 0.000
+                  - Node Type: "Index Scan"
+                    Parent Relationship: "Inner"
+                    Scan Direction: "Forward"
+                    Index Name: "lineitem_pkey"
+                    Relation Name: "lineitem"
+                    Schema: "public"
+                    Alias: "lineitem"
+                    Startup Cost: 0.43
+                    Total Cost: 1.38
+                    Plan Rows: 7
+                    Plan Width: 16
+                    Actual Startup Time: 0.112
+                    Actual Total Time: 0.112
+                    Actual Rows: 0
+                    Actual Loops: 147126
+                    Output: 
+                      - "lineitem.l_orderkey"
+                      - "lineitem.l_partkey"
+                      - "lineitem.l_suppkey"
+                      - "lineitem.l_linenumber"
+                      - "lineitem.l_quantity"
+                      - "lineitem.l_extendedprice"
+                      - "lineitem.l_discount"
+                      - "lineitem.l_tax"
+                      - "lineitem.l_returnflag"
+                      - "lineitem.l_linestatus"
+                      - "lineitem.l_shipdate"
+                      - "lineitem.l_commitdate"
+                      - "lineitem.l_receiptdate"
+                      - "lineitem.l_shipinstruct"
+                      - "lineitem.l_shipmode"
+                      - "lineitem.l_comment"
+                    Index Cond: "(lineitem.l_orderkey = orders.o_orderkey)"
+                    Rows Removed by Index Recheck: 0
+                    Filter: "(lineitem.l_shipdate > '1995-03-15'::date)"
+                    Rows Removed by Filter: 4
+                    Shared Hit Blocks: 502478
+                    Shared Read Blocks: 95628
+                    Shared Dirtied Blocks: 0
+                    Shared Written Blocks: 0
+                    Local Hit Blocks: 0
+                    Local Read Blocks: 0
+                    Local Dirtied Blocks: 0
+                    Local Written Blocks: 0
+                    Temp Read Blocks: 0
+                    Temp Written Blocks: 0
+                    I/O Read Time: 0.000
+                    I/O Write Time: 0.000
+  Triggers: 
+  Execution Time: 17932.438

@@ -1,0 +1,38 @@
+GroupAggregate  (cost=8424.89..8443.87 rows=759 width=22) (actual time=360.096..362.781 rows=7 loops=1)
+  Output: ("substring"(customer.c_phone, 1, 2)), count(1), sum(customer.c_acctbal)
+  Group Key: ("substring"(customer.c_phone, 1, 2))
+  Buffers: shared hit=56631 read=7811
+  InitPlan 1 (returns $0)
+    ->  Aggregate  (cost=4017.17..4017.18 rows=1 width=6) (actual time=147.674..147.674 rows=1 loops=1)
+          Output: avg(customer_1.c_acctbal)
+          Buffers: shared hit=12 read=3720
+          ->  Bitmap Heap Scan on public.customer customer_1  (cost=135.81..4005.25 rows=4768 width=6) (actual time=16.291..134.956 rows=38120 loops=1)
+                Output: customer_1.c_custkey, customer_1.c_name, customer_1.c_address, customer_1.c_nationkey, customer_1.c_phone, customer_1.c_acctbal, customer_1.c_mktsegment, customer_1.c_comment
+                Recheck Cond: (("substring"(customer_1.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])) AND (customer_1.c_acctbal > 0.00))
+                Heap Blocks: exact=3566
+                Buffers: shared hit=12 read=3720
+                ->  Bitmap Index Scan on idx_q23_c_ctrycode_acctbal  (cost=0.00..134.62 rows=4768 width=0) (actual time=15.763..15.763 rows=38120 loops=1)
+                      Index Cond: (("substring"(customer_1.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])) AND (customer_1.c_acctbal > 0.00))
+                      Buffers: shared hit=10 read=156
+  ->  Sort  (cost=4407.71..4409.61 rows=759 width=22) (actual time=359.666..360.492 rows=6384 loops=1)
+        Output: ("substring"(customer.c_phone, 1, 2)), customer.c_acctbal
+        Sort Key: ("substring"(customer.c_phone, 1, 2))
+        Sort Method: quicksort  Memory: 492kB
+        Buffers: shared hit=56631 read=7811
+        ->  Nested Loop Anti Join  (cost=49.31..4371.40 rows=759 width=22) (actual time=151.382..353.663 rows=6384 loops=1)
+              Output: "substring"(customer.c_phone, 1, 2), customer.c_acctbal
+              Buffers: shared hit=56629 read=7811
+              ->  Bitmap Heap Scan on public.customer  (cost=48.89..3065.90 rows=1750 width=26) (actual time=151.355..160.700 rows=19000 loops=1)
+                    Output: customer.c_custkey, customer.c_name, customer.c_address, customer.c_nationkey, customer.c_phone, customer.c_acctbal, customer.c_mktsegment, customer.c_comment
+                    Recheck Cond: (("substring"(customer.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])) AND (customer.c_acctbal > $0))
+                    Heap Blocks: exact=3557
+                    Buffers: shared hit=3661 read=3720
+                    ->  Bitmap Index Scan on idx_q23_c_ctrycode_acctbal  (cost=0.00..48.45 rows=1750 width=0) (actual time=150.843..150.843 rows=19000 loops=1)
+                          Index Cond: (("substring"(customer.c_phone, 1, 2) = ANY ('{13,31,23,29,30,18,17}'::text[])) AND (customer.c_acctbal > $0))
+                          Buffers: shared hit=104 read=3720
+              ->  Index Only Scan using idx_q23_o_custkey on public.orders  (cost=0.43..4.04 rows=18 width=4) (actual time=0.009..0.009 rows=1 loops=19000)
+                    Output: orders.o_custkey
+                    Index Cond: (orders.o_custkey = customer.c_custkey)
+                    Heap Fetches: 0
+                    Buffers: shared hit=52968 read=4091
+Execution time: 362.994 ms

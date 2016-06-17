@@ -1,0 +1,25 @@
+Sort  (cost=80589.51..80589.51 rows=1 width=14) (actual time=3096.386..3096.387 rows=2 loops=1)
+  Output: lineitem.l_shipmode, (count(orders.o_orderpriority) FILTER (WHERE (orders.o_orderpriority = ANY ('{1-URGENT,2-HIGH}'::text[])))), (count(orders.o_orderpriority) FILTER (WHERE (orders.o_orderpriority <> ALL ('{1-URGENT,2-HIGH}'::text[]))))
+  Sort Key: lineitem.l_shipmode
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=494384 read=10555
+  ->  HashAggregate  (cost=80589.49..80589.50 rows=1 width=14) (actual time=3096.341..3096.343 rows=2 loops=1)
+        Output: lineitem.l_shipmode, count(orders.o_orderpriority) FILTER (WHERE (orders.o_orderpriority = ANY ('{1-URGENT,2-HIGH}'::text[]))), count(orders.o_orderpriority) FILTER (WHERE (orders.o_orderpriority <> ALL ('{1-URGENT,2-HIGH}'::text[])))
+        Group Key: lineitem.l_shipmode
+        Buffers: shared hit=494379 read=10555
+        ->  Nested Loop  (cost=0.98..80235.06 rows=28354 width=14) (actual time=8.549..3069.434 rows=30988 loops=1)
+              Output: orders.o_orderpriority, lineitem.l_shipmode
+              Buffers: shared hit=494379 read=10555
+              ->  Index Only Scan using q21_lineitem_idx on public.lineitem  (cost=0.56..42831.11 rows=28354 width=9) (actual time=7.099..337.466 rows=30988 loops=1)
+                    Output: lineitem.l_receiptdate, lineitem.l_commitdate, lineitem.l_shipdate, lineitem.l_shipmode, lineitem.l_orderkey
+                    Index Cond: ((lineitem.l_receiptdate >= '1994-01-01'::date) AND (lineitem.l_receiptdate < '1995-01-01 00:00:00'::timestamp without time zone))
+                    Filter: ((lineitem.l_shipmode = ANY ('{MAIL,SHIP}'::text[])) AND (lineitem.l_commitdate < lineitem.l_receiptdate) AND (lineitem.l_shipdate < lineitem.l_commitdate))
+                    Rows Removed by Filter: 878856
+                    Heap Fetches: 0
+                    Buffers: shared hit=407252 read=4488
+              ->  Index Only Scan using q21_orders_idx on public.orders  (cost=0.43..1.31 rows=1 width=13) (actual time=0.087..0.087 rows=1 loops=30988)
+                    Output: orders.o_orderkey, orders.o_orderpriority
+                    Index Cond: (orders.o_orderkey = lineitem.l_orderkey)
+                    Heap Fetches: 0
+                    Buffers: shared hit=87127 read=6067
+Execution time: 3096.495 ms

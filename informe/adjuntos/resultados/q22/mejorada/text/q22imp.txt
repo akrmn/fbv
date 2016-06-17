@@ -1,0 +1,46 @@
+Sort  (cost=47327.16..47334.41 rows=2900 width=38) (actual time=3650.888..3653.794 rows=18314 loops=1)
+  Output: part.p_brand, part.p_type, part.p_size, (count(DISTINCT partsupp.ps_suppkey))
+  Sort Key: (count(DISTINCT partsupp.ps_suppkey)), part.p_brand, part.p_type, part.p_size
+  Sort Method: quicksort  Memory: 2199kB
+  Buffers: shared hit=87062 read=6315, temp read=724 written=724
+  ->  GroupAggregate  (cost=45731.94..47160.39 rows=2900 width=38) (actual time=2944.044..3398.794 rows=18314 loops=1)
+        Output: part.p_brand, part.p_type, part.p_size, count(DISTINCT partsupp.ps_suppkey)
+        Group Key: part.p_brand, part.p_type, part.p_size
+        Buffers: shared hit=87051 read=6315, temp read=724 written=724
+        ->  Sort  (cost=45731.94..46011.83 rows=111956 width=38) (actual time=2943.996..3324.895 rows=118274 loops=1)
+              Output: part.p_brand, part.p_type, part.p_size, partsupp.ps_suppkey
+              Sort Key: part.p_brand, part.p_type, part.p_size
+              Sort Method: external merge  Disk: 5776kB
+              Buffers: shared hit=87051 read=6315, temp read=724 written=724
+              ->  Hash Semi Join  (cost=1393.65..33280.49 rows=111956 width=38) (actual time=43.820..384.986 rows=118274 loops=1)
+                    Output: part.p_brand, part.p_type, part.p_size, partsupp.ps_suppkey
+                    Hash Cond: (partsupp.ps_suppkey = supplier.s_suppkey)
+                    Buffers: shared hit=87051 read=6315
+                    ->  Nested Loop  (cost=930.66..30017.38 rows=112281 width=38) (actual time=30.816..270.484 rows=118324 loops=1)
+                          Output: partsupp.ps_suppkey, part.p_brand, part.p_type, part.p_size
+                          Buffers: shared hit=87049 read=6104
+                          ->  Bitmap Heap Scan on public.part  (cost=930.24..5430.56 rows=28996 width=38) (actual time=29.412..93.406 rows=29581 loops=1)
+                                Output: part.p_partkey, part.p_name, part.p_mfgr, part.p_brand, part.p_type, part.p_size, part.p_container, part.p_retailprice, part.p_comment
+                                Recheck Cond: (part.p_size = ANY ('{49,14,23,45,19,3,36,9}'::integer[]))
+                                Filter: ((part.p_brand <> 'Brand#45'::text) AND (part.p_type !~~ 'MEDIUM POLISHED%'::text))
+                                Rows Removed by Filter: 2245
+                                Heap Blocks: exact=3712
+                                Buffers: shared hit=9 read=3908
+                                ->  Bitmap Index Scan on idx_q11_p_size_reverse_type  (cost=0.00..922.99 rows=31413 width=0) (actual time=28.869..28.869 rows=31826 loops=1)
+                                      Index Cond: (part.p_size = ANY ('{49,14,23,45,19,3,36,9}'::integer[]))
+                                      Buffers: shared hit=8 read=197
+                          ->  Index Only Scan using partsupp_pkey on public.partsupp  (cost=0.42..0.81 rows=4 width=8) (actual time=0.003..0.004 rows=4 loops=29581)
+                                Output: partsupp.ps_partkey, partsupp.ps_suppkey
+                                Index Cond: (partsupp.ps_partkey = part.p_partkey)
+                                Heap Fetches: 0
+                                Buffers: shared hit=87040 read=2196
+                    ->  Hash  (cost=338.00..338.00 rows=9999 width=4) (actual time=12.987..12.987 rows=9996 loops=1)
+                          Output: supplier.s_suppkey
+                          Buckets: 1024  Batches: 1  Memory Usage: 352kB
+                          Buffers: shared hit=2 read=211
+                          ->  Seq Scan on public.supplier  (cost=0.00..338.00 rows=9999 width=4) (actual time=0.008..10.455 rows=9996 loops=1)
+                                Output: supplier.s_suppkey
+                                Filter: (supplier.s_comment !~~ '%Customer%Complaints%'::text)
+                                Rows Removed by Filter: 4
+                                Buffers: shared hit=2 read=211
+Execution time: 3658.048 ms

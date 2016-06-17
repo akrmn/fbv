@@ -1,0 +1,27 @@
+Sort  (cost=304526.25..304526.25 rows=1 width=14) (actual time=15784.055..15784.055 rows=2 loops=1)
+  Output: lineitem.l_shipmode, (sum(CASE WHEN ((orders.o_orderpriority = '1-URGENT'::text) OR (orders.o_orderpriority = '2-HIGH'::text)) THEN 1 ELSE 0 END)), (sum(CASE WHEN ((orders.o_orderpriority <> '1-URGENT'::text) AND (orders.o_orderpriority <> '2-HIGH'::text)) THEN 1 ELSE 0 END))
+  Sort Key: lineitem.l_shipmode
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=1945 read=127834
+  ->  HashAggregate  (cost=304526.23..304526.24 rows=1 width=14) (actual time=15784.008..15784.010 rows=2 loops=1)
+        Output: lineitem.l_shipmode, sum(CASE WHEN ((orders.o_orderpriority = '1-URGENT'::text) OR (orders.o_orderpriority = '2-HIGH'::text)) THEN 1 ELSE 0 END), sum(CASE WHEN ((orders.o_orderpriority <> '1-URGENT'::text) AND (orders.o_orderpriority <> '2-HIGH'::text)) THEN 1 ELSE 0 END)
+        Group Key: lineitem.l_shipmode
+        Buffers: shared hit=1940 read=127834
+        ->  Merge Join  (cost=235689.14..304026.60 rows=28550 width=14) (actual time=11940.110..15755.828 rows=30988 loops=1)
+              Output: orders.o_orderpriority, lineitem.l_shipmode
+              Merge Cond: (orders.o_orderkey = lineitem.l_orderkey)
+              Buffers: shared hit=1940 read=127834
+              ->  Index Scan using orders_pkey on public.orders  (cost=0.43..64159.66 rows=1500000 width=13) (actual time=0.006..3532.416 rows=1499957 loops=1)
+                    Output: orders.o_orderkey, orders.o_custkey, orders.o_orderstatus, orders.o_totalprice, orders.o_orderdate, orders.o_orderpriority, orders.o_clerk, orders.o_shippriority, orders.o_comment
+                    Buffers: shared hit=1935 read=29292
+              ->  Sort  (cost=235688.71..235760.08 rows=28550 width=9) (actual time=11940.033..11945.888 rows=30988 loops=1)
+                    Output: lineitem.l_shipmode, lineitem.l_orderkey
+                    Sort Key: lineitem.l_orderkey
+                    Sort Method: quicksort  Memory: 2221kB
+                    Buffers: shared hit=5 read=98542
+                    ->  Seq Scan on public.lineitem  (cost=0.00..233575.84 rows=28550 width=9) (actual time=0.822..11919.863 rows=30988 loops=1)
+                          Output: lineitem.l_shipmode, lineitem.l_orderkey
+                          Filter: ((lineitem.l_shipmode = ANY ('{MAIL,SHIP}'::text[])) AND (lineitem.l_commitdate < lineitem.l_receiptdate) AND (lineitem.l_shipdate < lineitem.l_commitdate) AND (lineitem.l_receiptdate >= '1994-01-01'::date) AND (lineitem.l_receiptdate < '1995-01-01 00:00:00'::timestamp without time zone))
+                          Rows Removed by Filter: 5970227
+                          Buffers: shared hit=2 read=98542
+Execution time: 15785.879 ms
