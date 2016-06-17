@@ -2,7 +2,7 @@
 
 # Adjuntos
 
-Se adjunta un archivo `.tar.gz` que incluye los siguientes contenidos:
+Se adjunta el archivo `adjuntos.tar.gz` que incluye los siguientes contenidos:
 
 `consultas`
 
